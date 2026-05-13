@@ -3,7 +3,8 @@ import { PageHero } from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Studio A by Nancy collects, uses, and protects your information.",
+  description:
+    "How Studio A by Nancy collects, uses, and protects your information.",
   robots: { index: true, follow: false },
 };
 
@@ -38,13 +39,15 @@ export default function PrivacyPage() {
           <p className="mt-3">
             We use your information to reply to your inquiry personally,
             understand the scope of your project, and provide a thoughtful
-            response. We do not sell, rent, or share your information with
-            third parties for marketing.
+            response. We do not sell, rent, or share your information with third
+            parties for marketing.
           </p>
         </section>
 
         <section>
-          <h2 className="font-display text-2xl text-ink">How long we keep it</h2>
+          <h2 className="font-display text-2xl text-ink">
+            How long we keep it
+          </h2>
           <p className="mt-3">
             Inquiry information is retained for as long as it&apos;s reasonably
             useful to the relationship — typically the life of the project plus
@@ -53,7 +56,9 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-2xl text-ink">Cookies & analytics</h2>
+          <h2 className="font-display text-2xl text-ink">
+            Cookies & analytics
+          </h2>
           <p className="mt-3">
             Studioabynancy.com uses minimal first-party analytics to understand
             how the site is used. No personally identifying information is
@@ -69,10 +74,10 @@ export default function PrivacyPage() {
             You may request a copy, correction, or deletion of your information
             at any time by writing to{" "}
             <a
-              href="mailto:studio@studioabynancy.com"
+              href="mailto:nancy@studioabynancy.com"
               className="underline-offset-4 hover:underline"
             >
-              studio@studioabynancy.com
+              nancy@studioabynancy.com
             </a>
             . We&apos;ll respond within a reasonable time.
           </p>

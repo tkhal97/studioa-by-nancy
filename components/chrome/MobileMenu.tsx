@@ -90,7 +90,8 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
             onClick={() => {
               onClose();
               setTimeout(
-                () => openConcierge({ source: "mobile-menu", intent: "inquire" }),
+                () =>
+                  openConcierge({ source: "mobile-menu", intent: "inquire" }),
                 420,
               );
             }}
@@ -101,8 +102,8 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
         </nav>
 
         <div className="border-t border-stone/40 px-6 py-6 text-caption">
-          <p>studio@studioabynancy.com</p>
-          <p className="mt-1">+1 (555) 014-2208</p>
+          <p>nancy@studioabynancy.com</p>
+          <p className="mt-1">(503) 573-1777</p>
         </div>
       </motion.div>
     </motion.div>

@@ -68,48 +68,187 @@ const u = (id: string, w = 1600) =>
 // drop straight back in.
 export const projects: Project[] = [];
 
-export const services = [
+export type Service = {
+  n: string;
+  title: string;
+  body: string;
+  image: string;
+  intro: string;
+  includes: string[];
+  deliverables: string[];
+  idealFor: string;
+};
+
+export const services: Service[] = [
   {
     n: "01",
     title: "Residential Interior Design",
     body: "Full-service design for homes - warm, layered, and built around the way you actually live.",
-    image: u("photo-1505693416388-ac5ce068fe85", 900),
+    image: u("photo-1505693416388-ac5ce068fe85", 1600),
+    intro:
+      "Full-service design for primary residences, second homes, and remodels. We start with how you live - mornings, evenings, the way you host - and build a layered, livable home around it. Warm materials, considered details, and rooms that work as well at 7am as they do for dinner.",
+    includes: [
+      "On-site discovery and lifestyle conversation",
+      "Aesthetic direction, palette, and material strategy",
+      "Floor plans, elevations, and detailed construction documents",
+      "Custom furniture, lighting, and millwork design",
+      "Sourcing of antiques, vintage, and trade-only pieces",
+      "Coordination with architect, contractor, and trades",
+    ],
+    deliverables: [
+      "Design brief and aesthetic moodboards",
+      "Construction-ready drawings",
+      "Full furnishings and finishes specification",
+      "Photoreal renderings of key rooms",
+      "Final install with styling and reveal",
+    ],
+    idealFor:
+      "Homeowners renovating, building, or fully furnishing a primary or second home who want one studio managing the whole arc.",
   },
   {
     n: "02",
     title: "Commercial Interior Design",
     body: "Thoughtful design for hospitality, retail, and workspace - spaces that feel welcoming, functional, and made to last.",
-    image: u("photo-1493663284031-b7e3aefcae8e", 900),
+    image: u("photo-1493663284031-b7e3aefcae8e", 1600),
+    intro:
+      "Hospitality, retail, and workspace interiors built around how guests, customers, and teams actually move through a space. Designed to wear well, photograph beautifully, and quietly do the work of the brand without ever shouting it.",
+    includes: [
+      "Brand and program discovery with stakeholders",
+      "Space planning for guest flow, capacity, and operations",
+      "Material and finish strategy built for commercial use",
+      "Custom millwork, banquettes, and lighting design",
+      "FF&E specification, sourcing, and procurement",
+      "Trade and contractor coordination through opening",
+    ],
+    deliverables: [
+      "Concept package and material palette",
+      "Permit-ready drawing set",
+      "Full FF&E schedule and procurement plan",
+      "Photoreal renderings for stakeholders and press",
+      "Punch list and opening-day install",
+    ],
+    idealFor:
+      "Operators of hospitality, retail, restaurant, or boutique workspace projects who want an interior that holds up to daily use and represents the brand well.",
   },
   {
     n: "03",
     title: "Furnishing & Styling",
     body: "Custom and vintage pieces, carefully sourced and styled to feel collected - never staged.",
-    image: u("photo-1554995207-c18c203602cb", 900),
+    image: u("photo-1554995207-c18c203602cb", 1600),
+    intro:
+      "For homes that already have great architecture and just need the right pieces in the right places. We source, custom-build, and style every room - antique, vintage, and trade-only - until the home reads collected rather than catalogued.",
+    includes: [
+      "Room-by-room inventory and gap analysis",
+      "Layered sourcing: custom, vintage, antique, trade-only",
+      "Art, accessories, books, and styling objects",
+      "Window treatments, rugs, and lighting refresh",
+      "Logistics, white-glove delivery, and placement",
+      "Final styling session with everything in place",
+    ],
+    deliverables: [
+      "Furnishings plan and palette",
+      "Specification sheets with imagery and pricing",
+      "Procurement and delivery management",
+      "Two-day styling install",
+      "Reveal-ready, professionally photographed home",
+    ],
+    idealFor:
+      "Homeowners moving into a finished home, refreshing key rooms, or layering in collected pieces after a renovation.",
   },
   {
     n: "04",
     title: "Space Planning",
     body: "Floor plans, flow, and proportion - getting the bones of the room right before anything else.",
-    image: u("photo-1616594039964-ae9021a400a0", 900),
+    image: u("photo-1616594039964-ae9021a400a0", 1600),
+    intro:
+      "The most expensive mistakes are made in the bones. Before finishes or furnishings, we get the floor plan, sightlines, and proportion right - whether you're renovating, building new, or trying to make an existing layout finally work.",
+    includes: [
+      "Existing conditions survey and measurement",
+      "Lifestyle and program discovery",
+      "Wall, opening, and partition strategy",
+      "Furniture layout and clearance planning",
+      "Lighting and electrical placement",
+      "Coordination with architect or contractor",
+    ],
+    deliverables: [
+      "Scaled existing-conditions and proposed plans",
+      "Furniture layout with traffic flow notes",
+      "Electrical and lighting plan",
+      "Annotated walkthrough document",
+    ],
+    idealFor:
+      "Anyone planning a renovation, addition, or new build who wants the layout pressure-tested before construction starts.",
   },
   {
     n: "05",
     title: "Procurement",
     body: "Tracking, vendor coordination, and white-glove logistics - handled in-house, end-to-end.",
-    image: u("photo-1600607687644-c7171b42498f", 900),
+    image: u("photo-1600607687644-c7171b42498f", 1600),
+    intro:
+      "Procurement is where great design plans usually unravel - long lead times, damaged shipments, vendor gaps. We run procurement in-house: every PO, every freight schedule, every receiving inspection, until the last box is opened.",
+    includes: [
+      "Trade pricing and PO management",
+      "Production tracking with weekly updates",
+      "Receiving warehouse inspection and storage",
+      "Damage claims, returns, and replacements",
+      "White-glove freight scheduling",
+      "On-site delivery coordination",
+    ],
+    deliverables: [
+      "Live procurement tracker with status per item",
+      "Weekly client-facing status reports",
+      "Receiving inspection photos for every item",
+      "Coordinated install-day delivery sequence",
+    ],
+    idealFor:
+      "Clients with a design plan in hand (ours or another firm's) who want a single party owning execution end to end.",
   },
   {
     n: "06",
     title: "Renderings & Visualization",
     body: "Photoreal renderings so you can stand inside a room before a single piece is ordered.",
-    image: u("photo-1618221195710-dd6b41faaea6", 900),
+    image: u("photo-1618221195710-dd6b41faaea6", 1600),
+    intro:
+      "Renderings let you stand inside the room before anyone orders anything. We use photoreal 3D to test material combinations, lighting decisions, and furniture scale - so the most expensive choices are made on screen, not on site.",
+    includes: [
+      "3D model of the space from drawings or site survey",
+      "Material, finish, and lighting application",
+      "Day and evening lighting studies",
+      "Multiple view angles per room",
+      "Revision rounds against feedback",
+    ],
+    deliverables: [
+      "Photoreal still images of every key view",
+      "Optional fly-through or walk-through video",
+      "Side-by-side material option comparisons",
+      "High-resolution files for review and reference",
+    ],
+    idealFor:
+      "Anyone wanting to lock in big-ticket decisions - millwork, stone, lighting - before committing budget. Also great for stakeholder approval on commercial projects.",
   },
   {
     n: "07",
     title: "Installation Coordination",
     body: "We coordinate every trade and delivery - and hand over the finished home, fully installed and styled.",
-    image: u("photo-1600210492486-724fe5c67fb0", 900),
+    image: u("photo-1600210492486-724fe5c67fb0", 1600),
+    intro:
+      "The day you walk into the finished home shouldn't include any decisions. We orchestrate every trade and delivery, stage the install in the right sequence, and style every room - so the hand-off is a reveal, not a project meeting.",
+    includes: [
+      "Install sequencing and trade scheduling",
+      "On-site supervision through delivery and assembly",
+      "Window treatment, art, and lighting installation",
+      "Final styling: books, objects, linens, florals",
+      "Punch list resolution",
+      "Reveal walkthrough with the client",
+    ],
+    deliverables: [
+      "Install schedule with day-by-day sequence",
+      "On-site coordination through completion",
+      "Fully styled, reveal-ready home",
+      "Professional photography (optional add-on)",
+    ],
+    idealFor:
+      "Clients at the end of a design and procurement phase ready for a turnkey reveal - no boxes, no decisions, no punch list.",
   },
 ];
 

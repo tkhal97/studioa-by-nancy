@@ -4,8 +4,12 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 
 const ITEMS = [
-  { label: "Email", value: "studio@studioabynancy.com", href: "mailto:studio@studioabynancy.com" },
-  { label: "Phone", value: "+1 (503) 014-2208", href: "tel:+15030142208" },
+  {
+    label: "Email",
+    value: "nancy@studioabynancy.com",
+    href: "mailto:nancy@studioabynancy.com",
+  },
+  { label: "Phone", value: "(503) 573-1777", href: "tel:+15035731777" },
   { label: "Studio", value: "Portland, Oregon · By appointment" },
 ];
 
@@ -51,7 +55,10 @@ export function ContactBlock({
             <Reveal delay={0.15}>
               <dl className="divide-y divide-stone/40 border-y border-stone/40">
                 {ITEMS.map((i) => (
-                  <div key={i.label} className="flex flex-col gap-2 py-5 sm:grid sm:grid-cols-12 sm:gap-6 sm:py-6">
+                  <div
+                    key={i.label}
+                    className="flex flex-col gap-2 py-5 sm:grid sm:grid-cols-12 sm:gap-6 sm:py-6"
+                  >
                     <dt className="text-caption text-clay sm:col-span-4">
                       {i.label}
                     </dt>
@@ -70,7 +77,9 @@ export function ContactBlock({
                   </div>
                 ))}
                 <div className="flex flex-col gap-2 py-5 sm:grid sm:grid-cols-12 sm:gap-6 sm:py-6">
-                  <dt className="text-caption text-clay sm:col-span-4">Social</dt>
+                  <dt className="text-caption text-clay sm:col-span-4">
+                    Social
+                  </dt>
                   <dd className="flex flex-wrap gap-x-6 gap-y-2 font-display text-xl text-ink sm:col-span-8 sm:text-2xl">
                     {SOCIAL.map((s) => (
                       <a
@@ -94,9 +103,21 @@ export function ContactBlock({
                   href="/contact"
                   className="group mt-10 inline-flex items-center gap-3 text-caption text-ink"
                 >
-                  <span className="border-b border-ink/40 pb-1">Visit the contact page</span>
-                  <svg width="16" height="10" viewBox="0 0 18 10" fill="none" className="transition-transform duration-500 group-hover:translate-x-1">
-                    <path d="M1 5h16M12 1l5 4-5 4" stroke="currentColor" strokeWidth="1.2" />
+                  <span className="border-b border-ink/40 pb-1">
+                    Visit the contact page
+                  </span>
+                  <svg
+                    width="16"
+                    height="10"
+                    viewBox="0 0 18 10"
+                    fill="none"
+                    className="transition-transform duration-500 group-hover:translate-x-1"
+                  >
+                    <path
+                      d="M1 5h16M12 1l5 4-5 4"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                    />
                   </svg>
                 </Link>
               </Reveal>

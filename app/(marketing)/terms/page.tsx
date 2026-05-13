@@ -49,13 +49,15 @@ export default function TermsPage() {
           <p className="mt-3">
             This site may link to third-party services (e.g., scheduling, social
             media). Those services are governed by their own terms and privacy
-            practices. Studio A by Nancy is not responsible for their content
-            or policies.
+            practices. Studio A by Nancy is not responsible for their content or
+            policies.
           </p>
         </section>
 
         <section>
-          <h2 className="font-display text-2xl text-ink">Limitation of liability</h2>
+          <h2 className="font-display text-2xl text-ink">
+            Limitation of liability
+          </h2>
           <p className="mt-3">
             The site is provided as-is. We make reasonable efforts to keep it
             accurate and available, but we do not warrant that the site will be
@@ -78,10 +80,10 @@ export default function TermsPage() {
           <p className="mt-3">
             Questions about these terms can be sent to{" "}
             <a
-              href="mailto:studio@studioabynancy.com"
+              href="mailto:nancy@studioabynancy.com"
               className="underline-offset-4 hover:underline"
             >
-              studio@studioabynancy.com
+              nancy@studioabynancy.com
             </a>
             .
           </p>
