@@ -10,6 +10,7 @@ type Props = HTMLMotionProps<"div"> & {
   y?: number;
   once?: boolean;
   amount?: number;
+  eager?: boolean;
 };
 
 export function Reveal({
@@ -18,14 +19,20 @@ export function Reveal({
   y = 28,
   once = true,
   amount = 0.2,
+  eager = false,
   ...rest
 }: Props) {
   const reduce = useReducedMotion();
+  const triggerProps = eager
+    ? { animate: { opacity: 1, y: 0 } }
+    : {
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once, amount },
+      };
   return (
     <motion.div
       initial={{ opacity: 0, y: reduce ? 0 : y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, amount }}
+      {...triggerProps}
       transition={{ duration: reduce ? 0.2 : 0.9, ease, delay }}
       {...rest}
     >

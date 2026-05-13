@@ -70,7 +70,7 @@ export function AestheticsGallery({
                   delay: Math.min(i * 0.02, 0.18),
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group mb-4 break-inside-avoid sm:mb-5 lg:mb-6"
+                className="group mb-10 break-inside-avoid sm:mb-12 lg:mb-14"
               >
                 <Link href={`/portfolio/${p.slug}`} className="block">
                   <div
@@ -84,22 +84,14 @@ export function AestheticsGallery({
                       alt={p.alt}
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 95vw"
-                      className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                      className="object-cover transition-transform duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
                     />
-                    {/* Gradient + tag chips on hover */}
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/55 via-obsidian/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-1.5 p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:p-4">
-                      {p.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-canvas/85 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-ink backdrop-blur-md"
-                        >
-                          {labelFor(tag)}
-                        </span>
-                      ))}
-                    </div>
-                    {/* View affordance */}
-                    <span className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-canvas/60 bg-canvas/15 text-canvas opacity-0 backdrop-blur-md transition-all duration-500 group-hover:opacity-100 sm:right-4 sm:top-4">
+                    {/* warm vignette on hover */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/45 via-obsidian/10 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                    {/* inner brass border that draws on hover */}
+                    <div className="pointer-events-none absolute inset-3 border border-canvas/0 transition-colors duration-700 group-hover:border-canvas/40 sm:inset-4" />
+                    {/* View disc — top-right, brass tint on hover */}
+                    <span className="absolute right-3 top-3 inline-flex h-10 w-10 -translate-y-1 items-center justify-center rounded-full border border-canvas/55 bg-canvas/10 text-canvas opacity-0 backdrop-blur-md transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100 sm:right-4 sm:top-4">
                       <svg
                         width="12"
                         height="12"
@@ -115,6 +107,28 @@ export function AestheticsGallery({
                       </svg>
                     </span>
                   </div>
+
+                  {/* Caption — editorial layout under the photo */}
+                  <figcaption className="mt-5 sm:mt-6">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="h-px flex-1 bg-stone/50 transition-colors duration-700 group-hover:bg-accent" />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
+                        {labelFor(p.tags[0])}
+                      </span>
+                    </div>
+                    <h3 className="relative mt-3 inline-block max-w-full font-display text-[1.35rem] leading-[1.1] text-ink sm:text-[1.5rem] lg:text-[1.65rem]">
+                      <span className="relative">
+                        {p.title}
+                        <span
+                          aria-hidden
+                          className="absolute -bottom-1 left-0 right-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+                        />
+                      </span>
+                    </h3>
+                  </figcaption>
                 </Link>
               </motion.figure>
             ))}

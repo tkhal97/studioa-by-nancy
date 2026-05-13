@@ -58,7 +58,7 @@ export function LiquidHeader() {
             >
               <Monogram className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" />
               <span className="hidden text-caption sm:inline-block">
-                Est. 2018
+                Est. 2024
               </span>
             </Link>
 

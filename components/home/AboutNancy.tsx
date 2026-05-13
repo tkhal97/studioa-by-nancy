@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ArrowLink } from "@/components/ui/ArrowLink";
 
 export function AboutNancy() {
   return (
@@ -23,7 +23,9 @@ export function AboutNancy() {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-6 text-caption">Founder · Principal Designer</p>
+              <p className="mt-6 text-caption">
+                NANCY A. Founder · Principal Designer
+              </p>
             </Reveal>
           </div>
         </div>
@@ -69,27 +71,9 @@ export function AboutNancy() {
           </div>
 
           <Reveal delay={0.3}>
-            <Link
-              href="/about"
-              className="group mt-10 inline-flex items-center gap-3 text-caption text-ink"
-            >
-              <span className="border-b border-ink/40 pb-1">
-                Read the studio story
-              </span>
-              <svg
-                width="16"
-                height="10"
-                viewBox="0 0 18 10"
-                fill="none"
-                className="transition-transform duration-500 group-hover:translate-x-1"
-              >
-                <path
-                  d="M1 5h16M12 1l5 4-5 4"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                />
-              </svg>
-            </Link>
+            <div className="mt-10">
+              <ArrowLink href="/about">Read the studio story</ArrowLink>
+            </div>
           </Reveal>
         </div>
       </div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { aesthetics, aestheticTags } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
+import { ArrowLink } from "@/components/ui/ArrowLink";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
 
 type Params = { slug: string };
@@ -118,11 +119,14 @@ export default async function AestheticDetailPage({
       {related.length > 0 && (
         <section className="mx-auto max-w-[1440px] px-6 pb-20 lg:px-10 lg:pb-24">
           <Reveal>
-            <div className="text-caption">Related aesthetics</div>
+            <div className="flex items-center gap-4">
+              <span className="text-caption">Related aesthetics</span>
+              <span className="h-px flex-1 bg-stone/50" />
+            </div>
           </Reveal>
-          <div className="mt-8 grid gap-10 md:grid-cols-3">
-            {related.map((p) => (
-              <Reveal key={p.slug}>
+          <div className="mt-10 grid gap-10 md:grid-cols-3 lg:gap-12">
+            {related.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 0.05}>
                 <Link
                   href={`/portfolio/${p.slug}`}
                   className="group block"
@@ -133,13 +137,31 @@ export default async function AestheticDetailPage({
                       alt={p.alt}
                       fill
                       sizes="33vw"
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      className="object-cover transition-transform duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
                     />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/40 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                    <div className="pointer-events-none absolute inset-3 border border-canvas/0 transition-colors duration-700 group-hover:border-canvas/40 sm:inset-4" />
                   </div>
-                  <div className="mt-4 text-caption text-clay">
-                    {labelFor(p.tags[0])}
+                  <div className="mt-6">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="h-px w-8 bg-stone/60 transition-colors duration-700 group-hover:bg-accent" />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
+                        {labelFor(p.tags[0])}
+                      </span>
+                    </div>
+                    <h3 className="mt-3 inline-block font-display text-[1.5rem] leading-[1.1] text-ink lg:text-[1.65rem]">
+                      <span className="relative">
+                        {p.title}
+                        <span
+                          aria-hidden
+                          className="absolute -bottom-1 left-0 right-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+                        />
+                      </span>
+                    </h3>
                   </div>
-                  <h3 className="mt-2 font-display text-2xl">{p.title}</h3>
                 </Link>
               </Reveal>
             ))}
@@ -149,27 +171,9 @@ export default async function AestheticDetailPage({
 
       {/* Back link */}
       <section className="mx-auto max-w-[1440px] px-6 pb-16 lg:px-10 lg:pb-20">
-        <Link
-          href="/portfolio"
-          className="group inline-flex items-center gap-3 text-caption text-ink"
-        >
-          <svg
-            width="16"
-            height="10"
-            viewBox="0 0 18 10"
-            fill="none"
-            className="transition-transform duration-500 group-hover:-translate-x-1"
-          >
-            <path
-              d="M17 5H1M6 1L1 5l5 4"
-              stroke="currentColor"
-              strokeWidth="1.2"
-            />
-          </svg>
-          <span className="border-b border-ink/40 pb-1">
-            Back to the aesthetics gallery
-          </span>
-        </Link>
+        <ArrowLink href="/portfolio" direction="left">
+          Back to the aesthetics gallery
+        </ArrowLink>
       </section>
 
       <InquiryCTA />

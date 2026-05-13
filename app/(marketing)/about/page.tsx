@@ -21,7 +21,7 @@ const SERVICES = [
 ];
 
 const STATS = [
-  { k: "Founded", v: "2018" },
+  { k: "Founded", v: "2024" },
   { k: "Projects Completed", v: "60+" },
   { k: "Based In", v: "Portland, Oregon" },
   { k: "Focus", v: "Residential & Commercial Design" },
@@ -33,17 +33,17 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative px-6 pb-12 pt-28 sm:pt-32 lg:px-10 lg:pb-16 lg:pt-40">
         <div className="mx-auto max-w-[1440px]">
-          <Reveal>
+          <Reveal eager>
             <div className="text-caption">Studio · About</div>
           </Reveal>
-          <Reveal delay={0.05}>
+          <Reveal eager delay={0.05}>
             <h1 className="text-h1 mt-6 max-w-[22ch] font-display leading-[1.02]">
               Designed with intention.
               <br />
               <span className="italic font-light">Created for real life.</span>
             </h1>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal eager delay={0.1}>
             <p className="mt-6 max-w-[58ch] text-body">
               Studio A by Nancy is a Portland-based interior design studio
               specializing in refined residential and commercial spaces that
@@ -76,7 +76,7 @@ export default function AboutPage() {
         <div className="lg:col-span-7">
           <Reveal>
             <p className="drop-cap max-w-[58ch] text-body">
-              Founded in 2018, the studio was built around the idea that great
+              Founded in 2024, the studio was built around the idea that great
               design should feel effortless to live in. Every project is
               approached with careful attention to detail, balancing aesthetics,
               comfort, functionality, and the unique personality of each client.

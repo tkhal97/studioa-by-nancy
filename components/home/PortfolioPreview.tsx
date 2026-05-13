@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { aesthetics, aestheticTags } from "@/lib/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { ArrowLink } from "@/components/ui/ArrowLink";
 
 function labelFor(value: string): string {
   return aestheticTags.find((t) => t.value === value)?.label ?? value;
@@ -32,27 +33,7 @@ export function PortfolioPreview() {
             }
           />
           <Reveal delay={0.2}>
-            <Link
-              href="/portfolio"
-              className="group inline-flex items-center gap-3 text-caption text-ink"
-            >
-              <span className="border-b border-ink/40 pb-1">
-                View the aesthetics gallery
-              </span>
-              <svg
-                width="16"
-                height="10"
-                viewBox="0 0 18 10"
-                fill="none"
-                className="transition-transform duration-500 group-hover:translate-x-1"
-              >
-                <path
-                  d="M1 5h16M12 1l5 4-5 4"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                />
-              </svg>
-            </Link>
+            <ArrowLink href="/portfolio">View the aesthetics gallery</ArrowLink>
           </Reveal>
         </div>
 
@@ -83,8 +64,8 @@ export function PortfolioPreview() {
                     className={`relative ${aspects[i % aspects.length]} overflow-hidden bg-linen`}
                   >
                     <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                      whileHover={{ scale: 1.07 }}
+                      transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
                       className="absolute inset-0"
                     >
                       <Image
@@ -95,8 +76,12 @@ export function PortfolioPreview() {
                         className="object-cover"
                       />
                     </motion.div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian/30 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-                    <span className="absolute right-5 top-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-canvas/60 bg-canvas/10 text-canvas opacity-0 backdrop-blur-md transition-all duration-500 group-hover:opacity-100">
+                    {/* warm vignette */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/45 via-obsidian/5 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                    {/* inset border that draws on hover */}
+                    <div className="pointer-events-none absolute inset-4 border border-canvas/0 transition-colors duration-700 group-hover:border-canvas/45 sm:inset-5" />
+                    {/* view disc */}
+                    <span className="absolute right-5 top-5 inline-flex h-12 w-12 -translate-y-1 items-center justify-center rounded-full border border-canvas/55 bg-canvas/10 text-canvas opacity-0 backdrop-blur-md transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
                       <svg
                         width="14"
                         height="14"
@@ -112,15 +97,27 @@ export function PortfolioPreview() {
                       </svg>
                     </span>
                   </div>
-                  <div className="mt-6 flex items-end justify-between gap-6">
-                    <div>
-                      <div className="text-caption text-clay">
+
+                  {/* Editorial caption */}
+                  <div className="mt-7">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="h-px w-10 bg-stone/60 transition-colors duration-700 group-hover:bg-accent" />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
                         {p.tags.slice(0, 2).map(labelFor).join(" · ")}
-                      </div>
-                      <h3 className="mt-2 font-display text-2xl text-ink lg:text-3xl">
-                        {p.title}
-                      </h3>
+                      </span>
                     </div>
+                    <h3 className="mt-4 inline-block font-display text-[1.75rem] leading-[1.1] text-ink lg:text-[2.25rem]">
+                      <span className="relative">
+                        {p.title}
+                        <span
+                          aria-hidden
+                          className="absolute -bottom-1 left-0 right-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+                        />
+                      </span>
+                    </h3>
                   </div>
                 </Link>
               </Reveal>
