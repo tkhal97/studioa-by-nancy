@@ -14,7 +14,7 @@ export default function StartPage() {
   return (
     <main className="flex min-h-[100svh] flex-col items-center justify-center bg-canvas px-6 text-center">
       <Link href="/" className="text-ink">
-        <Wordmark className="text-3xl" />
+        <Wordmark className="text-4xl" />
       </Link>
       <p className="mt-8 max-w-[44ch] text-body">
         Opening your private intake - if it does not appear, please use the

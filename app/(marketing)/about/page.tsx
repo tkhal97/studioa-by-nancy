@@ -3,12 +3,16 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/ui/Reveal";
 import { Signature } from "@/components/ui/Signature";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
+import { PageHero } from "@/components/ui/PageHero";
+import { aesthetics } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Studio · About Nancy",
   description:
     "Studio A by Nancy is a Portland-based interior design studio specializing in refined residential and commercial spaces that feel elevated, timeless, and deeply personal.",
 };
+
+const heroPhoto = aesthetics.find((p) => p.slug === "linen-and-oak")!;
 
 const SERVICES = [
   "Residential Interior Design",
@@ -30,31 +34,21 @@ const STATS = [
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative px-6 pb-12 pt-28 sm:pt-32 lg:px-10 lg:pb-16 lg:pt-40">
-        <div className="mx-auto max-w-[1440px]">
-          <Reveal eager>
-            <div className="text-caption">Studio · About</div>
-          </Reveal>
-          <Reveal eager delay={0.05}>
-            <h1 className="text-h1 mt-6 max-w-[22ch] font-display leading-[1.02]">
-              Designed with intention.
-              <br />
-              <span className="italic font-light">Created for real life.</span>
-            </h1>
-          </Reveal>
-          <Reveal eager delay={0.1}>
-            <p className="mt-6 max-w-[58ch] text-body">
-              Studio A by Nancy is a Portland-based interior design studio
-              specializing in refined residential and commercial spaces that
-              feel elevated, timeless, and deeply personal.
-            </p>
-          </Reveal>
-        </div>
-        <div className="mx-auto mt-12 max-w-[1440px]">
-          <div className="hairline" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Studio · About"
+        title={
+          <>
+            Designed with intention.{" "}
+            <span className="italic font-light">Created for real life.</span>
+          </>
+        }
+        intro="Studio A by Nancy is a Portland-based interior design studio specializing in refined residential and commercial spaces that feel elevated, timeless, and deeply personal."
+        panel={{
+          src: heroPhoto.src,
+          alt: heroPhoto.alt,
+          caption: `In the studio · ${heroPhoto.title}`,
+        }}
+      />
 
       {/* Portrait + narrative */}
       <section className="mx-auto grid max-w-[1440px] gap-14 px-6 pb-16 lg:grid-cols-12 lg:gap-20 lg:px-10 lg:pb-20">

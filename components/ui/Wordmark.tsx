@@ -1,86 +1,64 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import {
+  LOGO_BYLINE_PATH,
+  LOGO_FULL_HEIGHT,
+  LOGO_MARK_HEIGHT,
+  LOGO_MARK_PATH,
+  LOGO_WIDTH,
+} from "./logo-paths";
 
+/**
+ * The Studio A by Nancy logo, drawn in `currentColor` and sized by font-size
+ * (use text-* classes). `full` is the complete lockup with "by nancy";
+ * `mark` is "studio a" alone for compact spots where the byline would be
+ * too small to read.
+ */
 export function Wordmark({
   className,
+  variant = "full",
   asLink = false,
-  /** disable the write-in animation (use for inert previews or e-mail) */
+  /** disable the reveal animation (use for inert previews or e-mail) */
   animate = true,
 }: {
   className?: string;
+  variant?: "full" | "mark";
   asLink?: boolean;
   animate?: boolean;
 }) {
   const reduce = useReducedMotion();
   const shouldAnimate = animate && !reduce;
+  const full = variant === "full";
+  const height = full ? LOGO_FULL_HEIGHT : LOGO_MARK_HEIGHT;
+  // full lockup is 3em tall; the mark alone is 1.5em
+  const em = full ? 3 : 1.5;
 
-  const inner = (
-    <span
-      className={cn(
-        "font-display inline-flex items-baseline gap-[0.2em] leading-none tracking-[-0.02em] select-none",
-        className,
-      )}
+  const logo = (
+    <motion.svg
+      viewBox={`0 0 ${LOGO_WIDTH} ${height}`}
+      role="img"
+      aria-label="Studio A by Nancy"
+      initial={shouldAnimate ? { clipPath: "inset(0 100% 0 0)" } : false}
+      animate={shouldAnimate ? { clipPath: "inset(0 0% 0 0)" } : undefined}
+      transition={{ duration: 1.6, delay: 0.3, ease: [0.65, 0, 0.35, 1] }}
+      className={cn("block shrink-0 select-none", className)}
+      style={{ height: `${em}em`, width: `${(em * LOGO_WIDTH) / height}em` }}
     >
-      <span>
-        Studio <span className="italic font-light">A</span> by
-      </span>
-      <span className="inline-block overflow-hidden pb-[0.1em] align-baseline">
-        <motion.span
-          initial={
-            shouldAnimate
-              ? { clipPath: "inset(0 100% -0.25em 0)" }
-              : false
-          }
-          animate={
-            shouldAnimate ? { clipPath: "inset(0 0% -0.25em 0)" } : false
-          }
-          transition={{
-            duration: 1.9,
-            delay: 0.45,
-            ease: [0.65, 0, 0.35, 1],
-          }}
-          className="font-signature inline-block text-[1.4em] leading-[0.85] tracking-[0.01em]"
-        >
-          Nancy
-        </motion.span>
-      </span>
-    </span>
+      <g fill="currentColor" fillRule="evenodd">
+        <path d={LOGO_MARK_PATH} />
+        {full && <path d={LOGO_BYLINE_PATH} />}
+      </g>
+    </motion.svg>
   );
+
   if (asLink)
     return (
-      <a href="/" aria-label="Studio A by Nancy - home">
-        {inner}
-      </a>
+      <Link href="/" aria-label="Studio A by Nancy - home">
+        {logo}
+      </Link>
     );
-  return inner;
-}
-
-export function Monogram({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 40" className={cn("h-7 w-7", className)} aria-hidden>
-      <circle
-        cx="20"
-        cy="20"
-        r="19"
-        fill="none"
-        stroke="currentColor"
-        strokeOpacity="0.45"
-        strokeWidth="1"
-      />
-      <text
-        x="50%"
-        y="58%"
-        textAnchor="middle"
-        fontFamily="var(--font-fraunces)"
-        fontSize="16"
-        fontStyle="italic"
-        fontWeight="300"
-        fill="currentColor"
-      >
-        Sa
-      </text>
-    </svg>
-  );
+  return logo;
 }

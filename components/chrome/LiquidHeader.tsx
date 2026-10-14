@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Monogram, Wordmark } from "@/components/ui/Wordmark";
+import { Wordmark } from "@/components/ui/Wordmark";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { useConcierge } from "@/components/intake/ConciergeProvider";
 import { MobileMenu } from "./MobileMenu";
@@ -45,19 +45,28 @@ export function LiquidHeader() {
       >
         <div
           className={cn(
-            "mx-auto grid w-full max-w-[1480px] grid-cols-[auto_1fr_auto] items-center gap-2 px-5 transition-[padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-4 sm:px-8 lg:grid-cols-[1fr_auto_1fr] lg:px-10",
+            "mx-auto flex w-full max-w-[1480px] items-center justify-between gap-2 px-5 transition-[padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-4 sm:px-8 lg:px-10",
             scrolled ? "py-3" : "py-5",
           )}
         >
-          {/* LEFT: monogram + Est + (lg+) Book Consultation + Start Your Project */}
-          <div className="flex items-center gap-3 lg:gap-5">
+          {/* LEFT: logo + Est + (lg+) Book Consultation + Start Your Project */}
+          <div className="flex items-center gap-3 lg:gap-6">
             <Link
               href="/"
               aria-label="Studio A by Nancy - home"
-              className="flex items-center gap-3 text-ink"
+              className="flex items-center gap-4 text-ink"
             >
-              <Monogram className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" />
-              <span className="hidden text-caption sm:inline-block">
+              <motion.span
+                animate={{ scale: scrolled ? 0.9 : 1 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="block origin-left"
+              >
+                <Wordmark
+                  variant="mark"
+                  className="text-[1.05rem] sm:text-[1.2rem]"
+                />
+              </motion.span>
+              <span className="hidden border-l border-stone/60 pl-4 text-caption sm:inline-block lg:hidden xl:inline-block">
                 Est. 2024
               </span>
             </Link>
@@ -82,33 +91,19 @@ export function LiquidHeader() {
             </div>
           </div>
 
-          {/* CENTER: wordmark */}
-          <Link
-            href="/"
-            aria-label="Studio A by Nancy"
-            className="justify-self-center"
-          >
-            <motion.div
-              animate={{ scale: scrolled ? 0.92 : 1 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Wordmark className="text-[1rem] text-ink sm:text-[1.2rem] lg:text-[1.35rem]" />
-            </motion.div>
-          </Link>
-
           {/* RIGHT: nav (lg+) / hamburger (mobile) */}
-          <div className="flex items-center justify-self-end">
+          <div className="flex items-center">
             <nav className="hidden items-center lg:flex">
               {NAV.map((item) => (
                 <Magnetic key={item.href} strength={0.18}>
                   <Link
                     href={item.href}
-                    className="group relative px-3 py-2 text-caption text-ink/80 transition-colors hover:text-ink lg:px-4"
+                    className="group relative whitespace-nowrap px-3 py-2 text-caption text-ink/80 transition-colors hover:text-ink xl:px-4"
                   >
                     <span>{item.label}</span>
                     <span
                       aria-hidden
-                      className="absolute bottom-1 left-3 right-3 h-px origin-left scale-x-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 lg:left-4 lg:right-4"
+                      className="absolute bottom-1 left-3 right-3 h-px origin-left scale-x-0 bg-ink transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 xl:left-4 xl:right-4"
                     />
                   </Link>
                 </Magnetic>

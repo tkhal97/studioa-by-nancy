@@ -41,7 +41,7 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
         className="glass-deep absolute inset-0 flex flex-col overflow-y-auto"
       >
         <div className="flex items-center justify-between px-6 pt-6">
-          <Wordmark className="text-xl" asLink />
+          <Wordmark variant="mark" className="text-xl text-ink" asLink />
           <button
             aria-label="Close menu"
             onClick={onClose}

@@ -12,6 +12,9 @@
   --color-oak: #a89478;
   --color-accent: #b89b7a;
   --color-accent-deep: #8e7556;
+  --color-terracotta: #a9502f;
+  --color-terracotta-soft: #c4704a;
+  --color-terracotta-deep: #7a361d;
 
   /* ─────────────  TYPOGRAPHY  ───────────── */
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;

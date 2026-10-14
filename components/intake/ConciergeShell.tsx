@@ -123,7 +123,7 @@ export function ConciergeShell() {
 
             {/* Header bar */}
             <div className="relative flex items-center justify-between border-b border-stone/40 px-6 py-5 sm:px-10">
-              <Wordmark className="text-lg" />
+              <Wordmark variant="mark" className="text-lg text-ink" />
               <div className="hidden text-caption text-clay md:block">
                 {copy.eyebrow}
               </div>

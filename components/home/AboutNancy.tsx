@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArrowLink } from "@/components/ui/ArrowLink";
+import { Signature } from "@/components/ui/Signature";
 
 export function AboutNancy() {
   return (
@@ -65,9 +66,7 @@ export function AboutNancy() {
           </Reveal>
 
           <div className="mt-12">
-            <span className="font-signature text-[clamp(4rem,7vw,6rem)] leading-none text-ink/90">
-              Nancy
-            </span>
+            <Signature delay={0.2} />
           </div>
 
           <Reveal delay={0.3}>

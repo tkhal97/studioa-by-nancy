@@ -7,7 +7,9 @@ import {
 } from "@/components/aesthetics/AestheticsGallery";
 import { PortfolioProjects } from "@/components/portfolio/PortfolioProjects";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
-import { projects } from "@/lib/content";
+import { aesthetics, projects } from "@/lib/content";
+
+const heroPhoto = aesthetics.find((p) => p.slug === "woven-warmth")!;
 
 export const metadata: Metadata = {
   title: "Aesthetics & Portfolio",
@@ -27,6 +29,11 @@ export default function AestheticsPage() {
           </>
         }
         intro="The aesthetics, palettes, and references that inform our work. Browse by feel — residential, commercial, mountain, coastal, mid-century, and more."
+        panel={{
+          src: heroPhoto.src,
+          alt: heroPhoto.alt,
+          caption: `Plate ${heroPhoto.id} · ${heroPhoto.title}`,
+        }}
       />
 
       <Suspense fallback={<AestheticsGallery />}>

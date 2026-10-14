@@ -48,7 +48,7 @@ export function Footer() {
 
       <div className="mx-auto grid max-w-[1440px] gap-14 px-6 py-20 lg:grid-cols-12 lg:px-10">
         <div className="lg:col-span-5">
-          <Wordmark className="text-[clamp(2rem,4vw,3rem)] text-canvas" />
+          <Wordmark className="text-[clamp(2.25rem,4vw,3.25rem)] text-canvas" />
           <p className="mt-6 max-w-[36ch] text-canvas/70">
             A Portland-based interior design studio crafting refined homes and
             considered commercial spaces - every project led personally by

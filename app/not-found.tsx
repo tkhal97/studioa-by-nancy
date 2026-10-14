@@ -4,7 +4,7 @@ import { Wordmark } from "@/components/ui/Wordmark";
 export default function NotFound() {
   return (
     <main className="flex min-h-[100svh] flex-col items-center justify-center bg-canvas px-6 text-center">
-      <Wordmark className="text-2xl" asLink />
+      <Wordmark className="text-4xl text-ink" asLink />
       <div className="mt-12 text-caption text-clay">Error · 404</div>
       <h1 className="text-h1 mt-6 max-w-[18ch] font-display">
         The page you&rsquo;re looking for{" "}
