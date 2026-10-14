@@ -99,7 +99,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <div className="mt-12">
-            <Signature size="text-[clamp(4rem,7vw,6rem)]" delay={0.4} />
+            <Signature />
           </div>
         </div>
       </section>

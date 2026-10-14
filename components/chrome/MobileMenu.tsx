@@ -103,7 +103,7 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
 
         <div className="border-t border-stone/40 px-6 py-6 text-caption">
           <p>nancy@studioabynancy.com</p>
-          <p className="mt-1">(503) 573-1777</p>
+          <p className="mt-1">(503) 764-7003</p>
         </div>
       </motion.div>
     </motion.div>

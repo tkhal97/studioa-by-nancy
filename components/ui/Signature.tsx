@@ -1,107 +1,113 @@
 "use client";
 
+import { useId } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import {
+  NANCY_INK,
+  NANCY_STROKES,
+  NANCY_TRACE_EM,
+  NANCY_VIEWBOX,
+} from "./signature-paths";
 
 type Props = {
-  text?: string;
   className?: string;
-  /** seconds, default 2.4 */
+  /** seconds of pen-on-paper time for the whole name, default 3 */
   duration?: number;
-  /** delay before drawing begins, default 0.3 */
+  /** delay after entering view, default 0.1 */
   delay?: number;
-  /** size class for the script. Default scales fluidly. */
+  /** font-size class; the signature scales with it. Default scales fluidly. */
   size?: string;
 };
 
-const PEN = [0.45, 0.05, 0.35, 1] as const;
+const [, , VB_W, VB_H] = NANCY_VIEWBOX.split(" ").map(Number);
+
+/** pause between strokes while the pen lifts */
+const PEN_LIFT = 0.14;
+
+/** start offset and duration for each stroke at a constant hand speed */
+function schedule(duration: number) {
+  const total = NANCY_STROKES.reduce((n, s) => n + s.length, 0);
+  let at = 0;
+  return NANCY_STROKES.map((s, i) => {
+    // the last stroke gets a little extra time to decelerate
+    const last = i === NANCY_STROKES.length - 1;
+    const dur = (duration * s.length) / total + (last ? 0.35 : 0);
+    const step = { d: s.d, at, dur, last };
+    at += dur + PEN_LIFT;
+    return step;
+  });
+}
 
 /**
- * Renders a script-font signature that writes itself in on viewport entry:
- * the pen traces the letter outlines left to right (stroke-dashoffset behind
- * a moving clip edge), then the ink floods in.
+ * "Nancy" signed in on viewport entry. A round-capped pen stroke travels the
+ * letters' centerline stroke by stroke (with short pen lifts) and reveals the
+ * ink through a mask, so the name is written at an even hand speed.
  */
 export function Signature({
-  text = "Nancy",
   className,
-  duration = 2.4,
-  delay = 0.3,
+  duration = 3,
+  delay = 0.1,
   size = "text-[clamp(4rem,7vw,6rem)]",
 }: Props) {
   const reduce = useReducedMotion();
-  const inView = { once: true, amount: 0.6 };
+  const timeline = schedule(duration);
+  const maskId = `sig-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
   return (
-    <div
-      className={cn("relative inline-block leading-none", size, className)}
+    <motion.svg
+      viewBox={NANCY_VIEWBOX}
       role="img"
-      aria-label={text}
+      aria-label="Nancy"
+      initial="unsigned"
+      whileInView="signed"
+      viewport={{ once: true, amount: 0.5 }}
+      className={cn("block overflow-visible text-ink/90", size, className)}
+      style={{
+        height: `${VB_H / NANCY_TRACE_EM}em`,
+        width: `${VB_W / NANCY_TRACE_EM}em`,
+      }}
     >
-      {/* invisible placeholder so the container reserves space and doesn't reflow */}
-      <span
-        aria-hidden
-        className="font-signature pointer-events-none select-none px-[0.1em] opacity-0"
-      >
-        {text}
-      </span>
-
-      {reduce ? (
-        <motion.span
-          aria-hidden
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={inView}
-          transition={{ duration: 0.6 }}
-          className="font-signature absolute inset-0 px-[0.1em] text-ink/90"
-        >
-          {text}
-        </motion.span>
-      ) : (
-        <motion.svg
-          aria-hidden
-          initial="hidden"
-          whileInView="written"
-          viewport={inView}
-          className="absolute inset-0 h-full w-full overflow-visible text-ink/90"
-        >
-          {/* moving clip edge = the pen's position */}
-          <motion.text
-            x="0.1em"
-            y="0.78em"
-            className="font-signature"
-            fill="currentColor"
-            stroke="currentColor"
-            strokeWidth={1.1}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeDasharray="1600"
-            variants={{
-              hidden: {
-                strokeDashoffset: 1600,
-                fillOpacity: 0,
-                clipPath: "inset(-0.3em 100% -0.4em -0.2em)",
-              },
-              written: {
-                strokeDashoffset: 0,
-                fillOpacity: 1,
-                clipPath: "inset(-0.3em -0.2em -0.4em -0.2em)",
-                transition: {
-                  delay,
-                  strokeDashoffset: { duration: duration * 1.1, ease: PEN, delay },
-                  clipPath: { duration, ease: PEN, delay },
-                  fillOpacity: {
-                    duration: 0.9,
-                    ease: "easeOut",
-                    delay: delay + duration * 0.55,
-                  },
+      <defs>
+        <mask id={maskId} maskUnits="userSpaceOnUse">
+          {timeline.map(({ d, at, dur, last }) => (
+            <motion.path
+              key={d}
+              d={d}
+              fill="none"
+              stroke="#fff"
+              strokeWidth={30}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              variants={{
+                // hidden until the pen lands, so the round cap does not show as a dot
+                unsigned: { pathLength: reduce ? 1 : 0, opacity: 0 },
+                signed: {
+                  pathLength: 1,
+                  opacity: 1,
+                  transition: reduce
+                    ? { duration: 0.6 }
+                    : {
+                        pathLength: {
+                          duration: dur,
+                          delay: delay + at,
+                          // steady hand; the final stroke eases off the page
+                          ease: last ? [0.3, 0.05, 0.2, 1] : [0.35, 0.05, 0.65, 0.95],
+                        },
+                        opacity: { duration: 0, delay: delay + at },
+                      },
                 },
-              },
-            }}
-          >
-            {text}
-          </motion.text>
-        </motion.svg>
-      )}
-    </div>
+              }}
+            />
+          ))}
+        </mask>
+      </defs>
+      <path
+        d={NANCY_INK}
+        fill="currentColor"
+        fillRule="evenodd"
+        mask={`url(#${maskId})`}
+      />
+    </motion.svg>
   );
 }

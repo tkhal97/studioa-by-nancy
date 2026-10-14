@@ -9,7 +9,7 @@ const ITEMS = [
     value: "nancy@studioabynancy.com",
     href: "mailto:nancy@studioabynancy.com",
   },
-  { label: "Phone", value: "(503) 573-1777", href: "tel:+15035731777" },
+  { label: "Phone", value: "(503) 764-7003", href: "tel:+15037647003" },
   { label: "Studio", value: "Portland, Oregon · By appointment" },
 ];
 
