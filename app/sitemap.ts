@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/utils";
 import { aesthetics, journal } from "@/lib/content";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const routes = [

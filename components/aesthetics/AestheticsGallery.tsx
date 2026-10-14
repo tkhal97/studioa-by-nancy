@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { aesthetics, aestheticTags, type AestheticTag } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,17 @@ const RATIO: Record<"portrait" | "landscape" | "square", string> = {
   landscape: "aspect-[4/3]",
   square: "aspect-square",
 };
+
+/**
+ * Reads the initial filter from `?filter=` on the client so the page can be
+ * statically exported. Must be rendered inside a <Suspense> boundary.
+ */
+export function AestheticsGalleryFromParams() {
+  const param = useSearchParams().get("filter");
+  const initial = aestheticTags.find((t) => t.value === param)?.value ?? "all";
+  // Remount when the param changes so footer links work while on the page.
+  return <AestheticsGallery key={initial} initialFilter={initial} />;
+}
 
 export function AestheticsGallery({
   initialFilter,
