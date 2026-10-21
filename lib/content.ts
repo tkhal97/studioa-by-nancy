@@ -54,6 +54,8 @@ export type ProjectImage = {
   alt: string;
   width: number;
   height: number;
+  /** CSS object-position used wherever the photo is cropped */
+  focus?: string;
 };
 
 export type Project = {
@@ -85,11 +87,13 @@ const shot = (
   width: number,
   height: number,
   alt: string,
+  focus?: string,
 ): ProjectImage => ({
   src: asset(`/images/projects/${project}/${name}.jpg`),
   alt,
   width,
   height,
+  focus,
 });
 
 // ───────────────────────────── Portfolio ─────────────────────────────
@@ -136,7 +140,7 @@ export const projects: Project[] = [
       "Applied arch mouldings bring gentle structure to the walls without adding more color, allowing the walnut crib and dresser to take center stage. A round, heirloom-style rug softens the room and anchors the layout.",
       "The playful details, including a hot-air-balloon lamp, wooden toy piano, and brass sconce with a green glass shade, give the room its character. In the closet, drawers, open shelving, and a glass-topped accessory drawer make room for tiny clothes, shoes, and bows.",
     ],
-    cover: shot("arched-nursery", "crib-arches", 1597, 2400, "Walnut crib in front of applied arch wall mouldings"),
+    cover: shot("arched-nursery", "crib-arches", 1597, 2400, "Walnut crib in front of applied arch wall mouldings", "50% 22%"),
     gallery: [
       shot("arched-nursery", "nursery-wide", 887, 1327, "Nursery with reading chair, crib, and round heirloom rug"),
       shot("arched-nursery", "reading-chair", 920, 1376, "Bouclé reading chair beside a hot-air-balloon lamp and arched mirror"),

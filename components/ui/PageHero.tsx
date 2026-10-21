@@ -10,6 +10,8 @@ export type HeroPanel = {
   alt: string;
   /** small mono caption under the photo, e.g. "Plate 03 · Woven Warmth" */
   caption: string;
+  /** CSS object-position for the arched crop */
+  focus?: string;
 };
 
 export function PageHero({
@@ -145,6 +147,7 @@ function TerracottaPanel({
               priority
               sizes="(min-width: 1024px) 20rem, 60vw"
               className="object-cover"
+              style={{ objectPosition: panel.focus }}
             />
           </motion.div>
         </div>

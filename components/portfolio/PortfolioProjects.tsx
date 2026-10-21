@@ -107,6 +107,7 @@ function ProjectCard({
         <Image
           src={p.cover.src}
           alt={p.cover.alt}
+          style={{ objectPosition: p.cover.focus }}
           fill
           sizes={wide ? "(min-width: 768px) 90vw, 95vw" : "(min-width: 768px) 45vw, 95vw"}
           className="object-cover transition-transform duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"

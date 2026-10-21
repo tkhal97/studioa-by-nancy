@@ -61,6 +61,7 @@ export default async function ProjectPage({
           priority
           sizes="100vw"
           className="object-cover"
+          style={{ objectPosition: project.cover.focus }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/30 via-transparent to-obsidian/70" />
         <div className="absolute inset-x-0 bottom-0 px-6 pb-12 text-canvas lg:px-10 lg:pb-20">
@@ -191,6 +192,7 @@ export default async function ProjectPage({
             <Image
               src={next.cover.src}
               alt={next.cover.alt}
+              style={{ objectPosition: next.cover.focus }}
               fill
               sizes="(min-width: 768px) 55vw, 95vw"
               className="object-cover transition-transform duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"

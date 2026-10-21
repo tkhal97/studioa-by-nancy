@@ -32,6 +32,7 @@ export default function PortfolioPage() {
         panel={{
           src: nursery.cover.src,
           alt: nursery.cover.alt,
+          focus: nursery.cover.focus,
           caption: `Completed · ${nursery.title}`,
         }}
       />

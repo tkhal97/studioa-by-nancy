@@ -67,6 +67,7 @@ export function PortfolioPreview() {
                       <Image
                         src={p.cover.src}
                         alt={p.cover.alt}
+                        style={{ objectPosition: p.cover.focus }}
                         fill
                         sizes="(min-width: 768px) 50vw, 95vw"
                         className="object-cover"
