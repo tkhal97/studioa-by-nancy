@@ -129,8 +129,8 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "arched-nursery",
-    title: "Arched Nursery",
+    slug: "the-nursery",
+    title: "The Nursery",
     category: "residential",
     type: "Nursery",
     scope: ["Wall detailing", "Furniture & lighting", "Closet design", "Styling"],

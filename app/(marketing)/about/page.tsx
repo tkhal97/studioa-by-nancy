@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 const heroPhoto = projects
-  .find((p) => p.slug === "arched-nursery")!
+  .find((p) => p.slug === "the-nursery")!
   .gallery.find((g) => g.src.endsWith("balloon-detail.jpg"))!;
 
 const SERVICES = [
@@ -48,7 +48,7 @@ export default function AboutPage() {
         panel={{
           src: heroPhoto.src,
           alt: heroPhoto.alt,
-          caption: "From the portfolio · Arched Nursery",
+          caption: "From the portfolio · The Nursery",
         }}
       />
 

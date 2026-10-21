@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "A selection of residential and commercial interiors by Nancy Alkhouri of Studio A.",
 };
 
-const nursery = projects.find((p) => p.slug === "arched-nursery")!;
+const nursery = projects.find((p) => p.slug === "the-nursery")!;
 
 export default function PortfolioPage() {
   return (
