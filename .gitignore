@@ -9,3 +9,6 @@ dist
 next-env.d.ts
 .vercel
 *.tsbuildinfo
+
+# Nancy's full-size source photos/videos (web versions live in public/)
+assets/originals

@@ -7,6 +7,7 @@ import { StepNav } from "./StepNav";
 import { CalendarEmbed } from "./CalendarEmbed";
 import { formatPhone } from "@/lib/utils";
 import { useConcierge } from "./ConciergeProvider";
+import { consultation } from "@/lib/content";
 
 const RES =
   "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80";
@@ -133,7 +134,10 @@ export function ScheduleFlow() {
           </h2>
           {step === 0 && (
             <p className="max-w-[52ch] text-body">
-              Two short questions before we open the calendar.
+              Two short questions before we open the calendar. Consultations
+              are {consultation.fee} ({consultation.formats.toLowerCase()}) and
+              the fee is applied toward your design fee if we continue working
+              together.
             </p>
           )}
           {step === 1 && (

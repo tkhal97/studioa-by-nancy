@@ -93,7 +93,7 @@ export function SectionHeading({
         </motion.div>
       )}
 
-      {/* Title with clip-path wipe — feels like a curtain rising */}
+      {/* Title with clip-path wipe, like a curtain rising */}
       <motion.h2
         initial={reduce ? { opacity: 0 } : { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 }}
         whileInView={

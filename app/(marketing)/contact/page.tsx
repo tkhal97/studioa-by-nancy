@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactBlock } from "@/components/home/ContactBlock";
+import { ConsultationOffer } from "@/components/services/ConsultationOffer";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
-import { aesthetics } from "@/lib/content";
+import { projects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     "Get in touch with Studio A by Nancy - a Portland-based interior design studio. We take a small number of projects each year.",
 };
 
-const heroPhoto = aesthetics.find((p) => p.slug === "stone-and-oak")!;
+const heroPhoto = projects.find((p) => p.slug === "charcoal-oak-bedroom")!.cover;
 
 export default function ContactPage() {
   return (
@@ -31,6 +32,7 @@ export default function ContactPage() {
         }}
       />
       <ContactBlock showSelfLink={false} showIntro={false} />
+      <ConsultationOffer />
       <InquiryCTA />
     </>
   );

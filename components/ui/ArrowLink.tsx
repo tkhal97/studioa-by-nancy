@@ -19,7 +19,7 @@ type Props = {
 /**
  * Editorial text link with a brass underline that draws on hover
  * and an extending line + arrow. Used across the site for inline
- * "Read the studio story" / "View the aesthetics gallery" affordances.
+ * "Read the studio story" / "View the portfolio" affordances.
  */
 export function ArrowLink({
   href,
@@ -49,7 +49,7 @@ export function ArrowLink({
           aria-hidden
           className="absolute inset-x-0 -bottom-1 h-px bg-ink/30"
         />
-        {/* brass overlay hairline — draws from origin on hover */}
+        {/* brass overlay hairline, drawing from origin on hover */}
         <span
           aria-hidden
           className={cn(

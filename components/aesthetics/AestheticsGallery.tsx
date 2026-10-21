@@ -84,7 +84,7 @@ export function AestheticsGallery({
                 }}
                 className="group mb-10 break-inside-avoid sm:mb-12 lg:mb-14"
               >
-                <Link href={`/portfolio/${p.slug}`} className="block">
+                <Link href={`/inspiration/${p.slug}`} className="block">
                   <div
                     className={cn(
                       "relative w-full overflow-hidden rounded-[3px] bg-linen",
@@ -102,7 +102,7 @@ export function AestheticsGallery({
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-obsidian/45 via-obsidian/10 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
                     {/* inner brass border that draws on hover */}
                     <div className="pointer-events-none absolute inset-3 border border-canvas/0 transition-colors duration-700 group-hover:border-canvas/40 sm:inset-4" />
-                    {/* View disc — top-right, brass tint on hover */}
+                    {/* View disc: top-right, brass tint on hover */}
                     <span className="absolute right-3 top-3 inline-flex h-10 w-10 -translate-y-1 items-center justify-center rounded-full border border-canvas/55 bg-canvas/10 text-canvas opacity-0 backdrop-blur-md transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100 sm:right-4 sm:top-4">
                       <svg
                         width="12"
@@ -120,7 +120,7 @@ export function AestheticsGallery({
                     </span>
                   </div>
 
-                  {/* Caption — editorial layout under the photo */}
+                  {/* Caption: editorial layout under the photo */}
                   <figcaption className="mt-5 sm:mt-6">
                     <div className="flex items-baseline gap-3">
                       <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">

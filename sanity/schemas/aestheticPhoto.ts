@@ -31,7 +31,7 @@ export const aestheticPhotoSchema = {
       rows: 3,
       title: "Description",
       description:
-        "1–2 sentences shown on the photo's detail page. Talk about materials, mood, and feeling — avoid claiming this is a real project.",
+        "1–2 sentences shown on the photo's detail page. Talk about materials, mood, and feeling; avoid claiming this is a real project.",
       validation: (r: { required: () => unknown }) => r.required(),
     },
     {

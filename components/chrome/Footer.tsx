@@ -11,7 +11,8 @@ const STUDIO = [
   { label: "Journal", href: "/journal" },
 ];
 const WORK = [
-  { label: "Aesthetics", href: "/portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Inspiration", href: "/inspiration" },
   { label: "Services", href: "/services" },
   { label: "Residential", href: "/portfolio?filter=residential" },
   { label: "Commercial", href: "/portfolio?filter=commercial" },

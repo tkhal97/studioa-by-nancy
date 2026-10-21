@@ -28,7 +28,7 @@ export default function PrivacyPage() {
           <h2 className="font-display text-2xl text-ink">What we collect</h2>
           <p className="mt-3">
             When you submit an inquiry through our concierge intake or contact
-            forms, we collect the information you choose to share — typically
+            forms, we collect the information you choose to share, typically
             your name, email address, phone number, project location, and
             details about your space and timeline.
           </p>
@@ -50,8 +50,8 @@ export default function PrivacyPage() {
           </h2>
           <p className="mt-3">
             Inquiry information is retained for as long as it&apos;s reasonably
-            useful to the relationship — typically the life of the project plus
-            a reasonable period after — and is deleted on request.
+            useful to the relationship, typically the life of the project plus
+            a reasonable period after, and is deleted on request.
           </p>
         </section>
 

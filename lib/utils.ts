@@ -9,6 +9,14 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://studioabynancy.com";
 
+/**
+ * Path to a file in /public, prefixed with the deploy base path. Next adds
+ * the base path to links and imported images, but not to plain string src.
+ */
+export function asset(path: string) {
+  return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+}
+
 export const CAL_LINK = process.env.NEXT_PUBLIC_CAL_LINK ?? "";
 
 export function formatPhone(value: string) {

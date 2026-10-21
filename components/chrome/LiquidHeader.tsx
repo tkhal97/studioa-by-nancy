@@ -10,7 +10,8 @@ import { useConcierge } from "@/components/intake/ConciergeProvider";
 import { MobileMenu } from "./MobileMenu";
 
 const NAV = [
-  { label: "Aesthetics", href: "/portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Inspiration", href: "/inspiration" },
   { label: "Studio", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
@@ -76,7 +77,7 @@ export function LiquidHeader() {
                 onClick={() =>
                   openConcierge({ source: "header", intent: "schedule" })
                 }
-                className="whitespace-nowrap rounded-full border border-ink/30 bg-transparent px-4 py-2.5 text-[0.7rem] uppercase tracking-[0.18em] text-ink transition-all duration-500 hover:border-ink hover:bg-ink hover:text-canvas"
+                className="hidden whitespace-nowrap rounded-full border border-ink/30 xl:inline-block bg-transparent px-4 py-2.5 text-[0.7rem] uppercase tracking-[0.18em] text-ink transition-all duration-500 hover:border-ink hover:bg-ink hover:text-canvas"
               >
                 Book Consultation
               </button>

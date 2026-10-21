@@ -7,7 +7,7 @@ type Props = {
   index: string;
   /** Eyebrow of the section about to appear, e.g. "Services" */
   label: string;
-  /** Tone for the transition band. Defaults to "canvas" — choose to match the
+  /** Tone for the transition band. Defaults to "canvas"; choose it to match the
    * section that follows so the divider blends into its destination. */
   tone?: "canvas" | "linen" | "walnut";
 };

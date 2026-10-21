@@ -25,6 +25,7 @@ export type ConciergeSource =
   | "portfolio"
   | "first-visit"
   | "mobile-menu"
+  | "services"
   | "direct";
 
 type OpenOptions = {

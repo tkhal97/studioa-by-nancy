@@ -9,6 +9,10 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { useConcierge } from "@/components/intake/ConciergeProvider";
+import { projects } from "@/lib/content";
+
+// Nancy's own work: the Dreamworks Dental lounge
+const heroPhoto = projects.find((p) => p.slug === "dreamworks-dental")!.cover;
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -34,8 +38,8 @@ export function Hero() {
         className="absolute inset-0"
       >
         <Image
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=80"
-          alt="A warm, sunlit living room with sculpted stone fireplace and oak millwork"
+          src={heroPhoto.src}
+          alt={heroPhoto.alt}
           fill
           priority
           sizes="100vw"

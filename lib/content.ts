@@ -1,8 +1,11 @@
-// Curated placeholder content for Studio A by Nancy.
-// Image URLs use Unsplash with constrained crops. Swap to Sanity when assets land.
+// Content for Studio A by Nancy. Portfolio projects use Nancy's own
+// photography; the Inspiration gallery and a few other spots still use
+// Unsplash stand-ins.
+
+import { asset } from "@/lib/utils";
 
 // ───────────────────────────── Aesthetics ─────────────────────────────
-// Standalone inspiration photos for the /portfolio "Aesthetics" gallery.
+// Standalone inspiration photos for the /inspiration gallery.
 // Tag-driven filtering. When Sanity is wired, this becomes a `aestheticPhoto`
 // document type and the gallery sources from there.
 
@@ -46,27 +49,183 @@ export type AestheticPhoto = {
   featured?: boolean;
 };
 
+export type ProjectImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type Project = {
   slug: string;
   title: string;
-  category: ("residential" | "commercial" | "modern" | "luxury" | "minimal" | "contemporary")[];
-  year: string;
-  location: string;
-  scope: string;
-  cover: string;
-  gallery: string[];
+  category: "residential" | "commercial";
+  /** what the space is, e.g. "Pediatric dental clinic" */
+  type: string;
+  location?: string;
+  year?: string;
+  scope: string[];
   excerpt: string;
+  story: string[];
+  cover: ProjectImage;
+  gallery: ProjectImage[];
+  video?: { src: string; poster: string; caption: string };
+  /** shown in the home page "Selected Work" section */
   featured?: boolean;
 };
 
 const u = (id: string, w = 1600) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=80`;
 
-// Real, completed projects. Currently empty — Nancy's case studies will be
-// populated here when Sanity is wired and real photography is delivered.
-// Keep the `Project` type intact so the PortfolioProjects component can
-// drop straight back in.
-export const projects: Project[] = [];
+// Web-sized copies of Nancy's photography live in /public/images/projects;
+// full-size originals are kept (untracked) in /assets/originals.
+const shot = (
+  project: string,
+  name: string,
+  width: number,
+  height: number,
+  alt: string,
+): ProjectImage => ({
+  src: asset(`/images/projects/${project}/${name}.jpg`),
+  alt,
+  width,
+  height,
+});
+
+// ───────────────────────────── Portfolio ─────────────────────────────
+// Completed projects, photographed on site. Shown on /portfolio.
+export const projects: Project[] = [
+  {
+    slug: "dreamworks-dental",
+    title: "Dreamworks Dental",
+    category: "commercial",
+    type: "Pediatric dental clinic",
+    scope: ["Space planning", "Finishes & millwork", "Furniture & lighting", "Art & styling"],
+    excerpt:
+      "A pediatric dental office designed to put parents at ease and make kids feel welcome, with a lounge-like waiting room, walnut detailing, and a reading nook for little patients.",
+    story: [
+      "The goal was simple: create a clinic that doesn’t feel clinical. Warm neutrals, cognac leather, sculptural sconces, and a softly lit aquarium make the waiting room feel relaxed from the moment families walk in.",
+      "The children’s corner has a house-shaped activity desk, chalkboard wall, and colorful patchwork rug. Walnut slat wainscoting and a black-framed sliding door carry that warmth into the treatment rooms, where a framed Bigfoot gallery gives patients something to talk about besides their teeth.",
+    ],
+    cover: shot("dreamworks-dental", "lounge", 2400, 1600, "Waiting lounge with a walnut coffee table, olive armchair, and cognac leather sofa"),
+    gallery: [
+      shot("dreamworks-dental", "reception", 2400, 1600, "Reception wall with the Dreamworks Dental logo, leather sofa, and sculptural sconces"),
+      shot("dreamworks-dental", "waiting-room", 2400, 1600, "Waiting room with leather sofa, aquarium, and tall windows"),
+      shot("dreamworks-dental", "kids-corner", 2400, 1600, "Kids' corner with a house-shaped activity desk and patchwork rug"),
+      shot("dreamworks-dental", "chalkboard-wall", 2400, 1600, "Walnut-framed chalkboard wall above slat wainscoting"),
+      shot("dreamworks-dental", "operatory", 2400, 1600, "Treatment room with a framed art grid and garden views"),
+      shot("dreamworks-dental", "bigfoot-gallery", 2400, 1600, "Framed vintage Bigfoot headlines and Portland prints on floating shelves"),
+      shot("dreamworks-dental", "hallway", 2400, 1600, "Hallway with walnut slat wainscoting and a black-framed sliding glass door"),
+    ],
+    video: {
+      src: asset("/videos/dreamworks-dental-walkthrough.mp4"),
+      poster: asset("/videos/dreamworks-dental-walkthrough-poster.jpg"),
+      caption: "Walkthrough",
+    },
+    featured: true,
+  },
+  {
+    slug: "arched-nursery",
+    title: "Arched Nursery",
+    category: "residential",
+    type: "Nursery",
+    scope: ["Wall detailing", "Furniture & lighting", "Closet design", "Styling"],
+    excerpt:
+      "A soft, storybook nursery with arched wall details, walnut furniture, an heirloom-style rug, and thoughtful storage for all the little things.",
+    story: [
+      "Applied arch mouldings bring gentle structure to the walls without adding more color, allowing the walnut crib and dresser to take center stage. A round, heirloom-style rug softens the room and anchors the layout.",
+      "The playful details, including a hot-air-balloon lamp, wooden toy piano, and brass sconce with a green glass shade, give the room its character. In the closet, drawers, open shelving, and a glass-topped accessory drawer make room for tiny clothes, shoes, and bows.",
+    ],
+    cover: shot("arched-nursery", "crib-arches", 1597, 2400, "Walnut crib in front of applied arch wall mouldings"),
+    gallery: [
+      shot("arched-nursery", "nursery-wide", 887, 1327, "Nursery with reading chair, crib, and round heirloom rug"),
+      shot("arched-nursery", "reading-chair", 920, 1376, "Bouclé reading chair beside a hot-air-balloon lamp and arched mirror"),
+      shot("arched-nursery", "dresser-gallery-wall", 1416, 2128, "Walnut dresser beneath a small gallery wall"),
+      shot("arched-nursery", "balloon-detail", 1416, 2128, "Hot-air-balloon lamp on a round side table"),
+      shot("arched-nursery", "toy-piano", 1416, 2128, "Wooden toy piano on soft carpet"),
+      shot("arched-nursery", "through-the-crib", 1416, 2128, "Plush toys seen through the crib slats"),
+      shot("arched-nursery", "closet", 881, 1317, "Custom closet with drawers, hanging rail, and open shelving"),
+      shot("arched-nursery", "closet-detail", 1416, 2128, "Glass-topped accessory drawer with brass pulls"),
+      shot("arched-nursery", "sconce", 1416, 2128, "Brass sconce with a ribbed green glass shade"),
+    ],
+    featured: true,
+  },
+  {
+    slug: "charcoal-oak-bedroom",
+    title: "Charcoal & Oak Bedroom",
+    category: "residential",
+    type: "Primary bedroom",
+    scope: ["Feature wall", "Furniture", "Styling"],
+    excerpt:
+      "A charcoal-paneled feature wall gives this primary bedroom a sense of calm, balanced by solid oak furniture, plush carpet, and a few well-chosen details.",
+    story: [
+      "The charcoal paneling frames the bed and makes the white linens and oak furniture feel even warmer. The rest of the room is kept light and uncluttered.",
+      "Solid oak nightstands and a long dresser add warmth and storage, while an arched floor mirror helps the room feel more open. Styling is intentionally simple: glass, ceramic, a snake plant, and a small sculptural object.",
+    ],
+    cover: shot("charcoal-oak-bedroom", "bed-wall", 1605, 2400, "Bed against a charcoal panelled wall with an oak nightstand"),
+    gallery: [
+      shot("charcoal-oak-bedroom", "dresser-mirror", 1416, 2128, "Oak dresser beside an arched floor mirror"),
+      shot("charcoal-oak-bedroom", "nightstand", 1597, 2400, "Oak nightstand with a white ceramic vase against the dark wall"),
+      shot("charcoal-oak-bedroom", "dresser-styling", 1416, 2128, "Glass vase and snake plant styled on the oak dresser"),
+      shot("charcoal-oak-bedroom", "dresser-detail", 1416, 2128, "Ball of twine and sculpture on the rounded corner of the dresser"),
+      shot("charcoal-oak-bedroom", "room-view", 2128, 1416, "Bedroom with arched mirror and oak dresser"),
+    ],
+    featured: true,
+  },
+  {
+    slug: "family-playroom",
+    title: "Family Playroom",
+    category: "residential",
+    type: "Playroom & family room",
+    scope: ["Space planning", "Storage", "Furniture", "Styling"],
+    excerpt:
+      "A bright family room built for everyday use, with open storage for books and toys, warm oak details, and a deep sectional for movie nights.",
+    story: [
+      "This room needed to work for everyone: kids on the floor, adults on the sofa, and plenty of toys in between. Low storage and open shelves keep things within reach and easy to put away.",
+      "An oak slat accent and woven-front media console bring warmth to the white walls. A deep sectional and round coffee table leave the center of the room open for play.",
+    ],
+    cover: shot("family-playroom", "playroom", 2128, 1416, "Playroom with sectional sofa, media console, and open shelving"),
+    gallery: [
+      shot("family-playroom", "media-wall", 1376, 920, "Oak slat accent, woven media console, and toy storage"),
+      shot("family-playroom", "lounge-corner", 1286, 860, "Sectional and armchair with a wood side table and floating shelves"),
+    ],
+    featured: true,
+  },
+  {
+    slug: "fireside-great-room",
+    title: "Fireside Great Room",
+    category: "residential",
+    type: "Great room",
+    scope: ["Fireplace wall", "Furniture layout", "Styling"],
+    excerpt:
+      "A vaulted great room with a charcoal shiplap fireplace wall, comfortable seating for gathering, and layers of cognac leather, cream bouclé, and marble.",
+    story: [
+      "The charcoal shiplap fireplace wall gives this tall, open room a clear focal point. Two seating areas, with cognac leather by the fire and softer cream pieces by the windows, make the space feel welcoming and easy to use.",
+      "A large traditional rug connects both areas, while a marble coffee table and floating picture ledges leave room for the family’s own photos and memories.",
+    ],
+    cover: shot("fireside-great-room", "great-room", 1800, 2400, "Vaulted great room with bouclé chairs, leather sofas, and a large rug"),
+    gallery: [
+      shot("fireside-great-room", "fireplace", 1800, 2400, "Charcoal shiplap fireplace wall beside a cognac leather sofa"),
+      shot("fireside-great-room", "fireplace-wide", 1800, 2400, "Fireplace wall with a marble coffee table in the foreground"),
+      shot("fireside-great-room", "sofa-wall", 1800, 2400, "Cream sofa beneath floating picture ledges"),
+      shot("fireside-great-room", "seating", 1800, 2400, "Seating area with a marble coffee table and patterned rug"),
+    ],
+  },
+];
+
+/** Detail shots not tied to a single project. */
+export const details = {
+  slatWall: shot("details", "slat-wall", 1416, 2128, "Stacked wood slat feature wall against black paint"),
+  globeChandelier: shot("details", "globe-chandelier", 1416, 2128, "Black chandelier with clear glass globes"),
+};
+
+// ───────────────────────────── Consultation ─────────────────────────────
+export const consultation = {
+  fee: "$250",
+  formats: "Zoom or in-home",
+  credit:
+    "Applied toward your design fee if we continue working together - so neither of us spends time on a project that isn't the right fit.",
+};
 
 export type Service = {
   n: string;
@@ -84,7 +243,7 @@ export const services: Service[] = [
     n: "01",
     title: "Residential Interior Design",
     body: "Full-service design for homes - warm, layered, and built around the way you actually live.",
-    image: u("photo-1505693416388-ac5ce068fe85", 1600),
+    image: asset("/images/projects/arched-nursery/crib-arches.jpg"),
     intro:
       "Full-service design for primary residences, second homes, and remodels. We start with how you live - mornings, evenings, the way you host - and build a layered, livable home around it. Warm materials, considered details, and rooms that work as well at 7am as they do for dinner.",
     includes: [
@@ -109,7 +268,7 @@ export const services: Service[] = [
     n: "02",
     title: "Commercial Interior Design",
     body: "Thoughtful design for hospitality, retail, and workspace - spaces that feel welcoming, functional, and made to last.",
-    image: u("photo-1493663284031-b7e3aefcae8e", 1600),
+    image: asset("/images/projects/dreamworks-dental/reception.jpg"),
     intro:
       "Hospitality, retail, and workspace interiors built around how guests, customers, and teams actually move through a space. Designed to wear well, photograph beautifully, and quietly do the work of the brand without ever shouting it.",
     includes: [
@@ -134,7 +293,7 @@ export const services: Service[] = [
     n: "03",
     title: "Furnishing & Styling",
     body: "Custom and vintage pieces, carefully sourced and styled to feel collected - never staged.",
-    image: u("photo-1554995207-c18c203602cb", 1600),
+    image: asset("/images/projects/charcoal-oak-bedroom/dresser-styling.jpg"),
     intro:
       "For homes that already have great architecture and just need the right pieces in the right places. We source, custom-build, and style every room - antique, vintage, and trade-only - until the home reads collected rather than catalogued.",
     includes: [
@@ -256,7 +415,7 @@ export const process = [
   {
     n: "01",
     title: "Discovery",
-    body: "We begin with a private consultation - your space, your lifestyle, and the way you want to live in it.",
+    body: "We begin with a private consultation - over Zoom or in your home - to talk through your space, your lifestyle, and the way you want to live in it.",
   },
   {
     n: "02",
@@ -355,7 +514,7 @@ export const journal = [
 // ───────────────────────────── Aesthetics gallery ─────────────────────────────
 // Hand-curated inspiration photos. Tag each shot with EVERY style that applies.
 // Commercial-tagged shots should depict commercial spaces (retail, hospitality,
-// workspace, showroom) — not residential rooms.
+// workspace, showroom), not residential rooms.
 
 export const aesthetics: AestheticPhoto[] = [
   {
@@ -363,7 +522,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "stone-and-oak",
     title: "Stone & Oak",
     description:
-      "Warmth balanced on stone and oak — bone, oat, and brushed bronze, held in soft daylight. A palette that feels right at any hour.",
+      "Warmth balanced on stone and oak: bone, oat, and brushed bronze, held in soft daylight. A palette that feels right at any hour.",
     src: u("photo-1600585154340-be6161a56a0c", 1400),
     alt: "Sun-lit interior with stone and warm oak materials",
     tags: ["residential", "modern", "warm-organic", "mountain"],
@@ -375,7 +534,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "light-and-linen",
     title: "Light & Linen",
     description:
-      "An interior planned around natural light — pale stone, light-stained wood, and washed linen doing the quiet work.",
+      "An interior planned around natural light, with pale stone, light-stained wood, and washed linen doing the quiet work.",
     src: u("photo-1505693416388-ac5ce068fe85", 1400),
     alt: "Bright residential interior with natural light",
     tags: ["residential", "modern", "contemporary"],
@@ -386,7 +545,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "woven-warmth",
     title: "Woven Warmth",
     description:
-      "A room composed around a single woven piece — linen, leather, and natural fiber doing the rest. Warmth without weight.",
+      "A room composed around a single woven piece, with linen, leather, and natural fiber doing the rest. Warmth without weight.",
     src: u("photo-1616594039964-ae9021a400a0", 1400),
     alt: "Warm interior with woven textures and natural materials",
     tags: ["residential", "warm-organic", "transitional"],
@@ -397,7 +556,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "quiet-modern",
     title: "Quiet Modern",
     description:
-      "A restrained palette and a deep, considered material — generous in feel, never loud. Built for daily use.",
+      "A restrained palette and a deep, considered material. Generous in feel, never loud. Built for daily use.",
     src: u("photo-1600210492486-724fe5c67fb0", 1400),
     alt: "Modern interior with restrained palette",
     tags: ["residential", "modern", "minimal", "luxury"],
@@ -421,7 +580,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "washed-linen",
     title: "Washed Linen",
     description:
-      "A pared-back interior built around natural light and a single material story — washed linen, oiled oak, the slightest brass detail.",
+      "A pared-back interior built around natural light and a single material story: washed linen, oiled oak, and the slightest brass detail.",
     src: u("photo-1600566753190-17f0baa2a6c3", 1400),
     alt: "Pared-back interior with natural light and linen textures",
     tags: ["residential", "minimal", "contemporary", "warm-organic"],
@@ -443,7 +602,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "walnut-and-wool",
     title: "Walnut & Wool",
     description:
-      "Walnut, wool, and a single sculptural lamp. Mid-century lines without the museum feeling — built to be used.",
+      "Walnut, wool, and a single sculptural lamp. Mid-century lines without the museum feeling, built to be used.",
     src: u("photo-1554995207-c18c203602cb", 1400),
     alt: "Mid-century interior with walnut furniture and wool textures",
     tags: ["residential", "mid-century", "contemporary", "warm-organic"],
@@ -487,7 +646,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "cabin-warmth",
     title: "Cabin Warmth",
     description:
-      "A textured interior built around stone and exposed wood. Warm under foot, warm to the eye — designed for long evenings.",
+      "A textured interior built around stone and exposed wood. Warm underfoot and warm to the eye, designed for long evenings.",
     src: u("photo-1505691723518-36a5ac3be353", 1400),
     alt: "Cabin interior with stone and warm wood beams",
     tags: ["residential", "mountain", "warm-organic", "transitional"],
@@ -532,7 +691,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "plaster-and-oak",
     title: "Plaster & Oak",
     description:
-      "Pale plaster, oat upholstery, and a single statement piece. A modern interior composed entirely in neutrals — restrained, never austere.",
+      "Pale plaster, oat upholstery, and a single statement piece. A modern interior composed entirely in neutrals, restrained but never austere.",
     src: u("photo-1502672260266-1c1ef2d93688", 1400),
     alt: "Modern interior with plaster walls and neutral palette",
     tags: ["residential", "minimal", "modern", "contemporary"],
@@ -554,7 +713,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "brass-and-stone",
     title: "Brass & Stone",
     description:
-      "An interior built around brushed brass and quarried stone — utilitarian by design, generous by intention.",
+      "An interior built around brushed brass and quarried stone, utilitarian by design and generous by intention.",
     src: u("photo-1616137422495-1e9e46e2aa77", 1400),
     alt: "Interior with brushed brass details and quarried stone",
     tags: ["residential", "modern", "contemporary", "luxury"],
@@ -588,7 +747,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "boutique-retail",
     title: "Boutique Retail",
     description:
-      "Editorial display, wood shelving, and considered lighting — a retail environment designed to slow the shopper down.",
+      "Editorial displays, wood shelving, and considered lighting create a retail environment designed to slow the shopper down.",
     src: u("photo-1493663284031-b7e3aefcae8e", 1400),
     alt: "Boutique retail interior with curated display and wood shelving",
     tags: ["commercial", "modern", "luxury", "contemporary"],
@@ -599,7 +758,7 @@ export const aesthetics: AestheticPhoto[] = [
     slug: "hospitality-warmth",
     title: "Hospitality Warmth",
     description:
-      "A commercial interior shaped by warm light and layered texture — the kind of space that lets a guest exhale on arrival.",
+      "A commercial interior shaped by warm light and layered texture, the kind of space that lets a guest exhale on arrival.",
     src: u("photo-1600607687644-c7171b42498f", 1400),
     alt: "Hospitality interior with warm light and layered textures",
     tags: ["commercial", "luxury", "warm-organic", "contemporary"],

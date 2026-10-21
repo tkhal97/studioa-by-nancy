@@ -3,19 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { aesthetics, aestheticTags } from "@/lib/content";
+import { projects } from "@/lib/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 
-function labelFor(value: string): string {
-  return aestheticTags.find((t) => t.value === value)?.label ?? value;
-}
-
 export function PortfolioPreview() {
-  const featured = aesthetics.filter((a) => a.featured).slice(0, 4);
-  // fall back to first 4 if none are explicitly featured
-  const items = featured.length > 0 ? featured : aesthetics.slice(0, 4);
+  const featured = projects.filter((p) => p.featured).slice(0, 4);
+  // fall back to the first 4 if none are explicitly featured
+  const items = featured.length > 0 ? featured : projects.slice(0, 4);
 
   return (
     <section className="relative py-20 lg:py-28">
@@ -26,14 +22,14 @@ export function PortfolioPreview() {
             eyebrow="Selected Work"
             title={
               <>
-                A look at our design inspirations,
+                Completed work,
                 <br />
                 <span className="italic font-light">room by room.</span>
               </>
             }
           />
           <Reveal delay={0.2}>
-            <ArrowLink href="/portfolio">View the aesthetics gallery</ArrowLink>
+            <ArrowLink href="/portfolio">View the full portfolio</ArrowLink>
           </Reveal>
         </div>
 
@@ -69,8 +65,8 @@ export function PortfolioPreview() {
                       className="absolute inset-0"
                     >
                       <Image
-                        src={p.src}
-                        alt={p.alt}
+                        src={p.cover.src}
+                        alt={p.cover.alt}
                         fill
                         sizes="(min-width: 768px) 50vw, 95vw"
                         className="object-cover"
@@ -106,7 +102,7 @@ export function PortfolioPreview() {
                       </span>
                       <span className="h-px w-10 bg-stone/60 transition-colors duration-700 group-hover:bg-accent" />
                       <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
-                        {p.tags.slice(0, 2).map(labelFor).join(" · ")}
+                        {p.type}
                       </span>
                     </div>
                     <h3 className="mt-4 inline-block font-display text-[1.75rem] leading-[1.1] text-ink lg:text-[2.25rem]">

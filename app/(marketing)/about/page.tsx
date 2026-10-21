@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Signature } from "@/components/ui/Signature";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
 import { PageHero } from "@/components/ui/PageHero";
-import { aesthetics } from "@/lib/content";
+import { projects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Studio · About Nancy",
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
     "Studio A by Nancy is a Portland-based interior design studio specializing in refined residential and commercial spaces that feel elevated, timeless, and deeply personal.",
 };
 
-const heroPhoto = aesthetics.find((p) => p.slug === "linen-and-oak")!;
+const heroPhoto = projects
+  .find((p) => p.slug === "arched-nursery")!
+  .gallery.find((g) => g.src.endsWith("balloon-detail.jpg"))!;
 
 const SERVICES = [
   "Residential Interior Design",
@@ -46,7 +48,7 @@ export default function AboutPage() {
         panel={{
           src: heroPhoto.src,
           alt: heroPhoto.alt,
-          caption: `In the studio · ${heroPhoto.title}`,
+          caption: "From the portfolio · Arched Nursery",
         }}
       />
 

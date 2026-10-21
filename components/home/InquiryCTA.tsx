@@ -5,6 +5,8 @@ import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion
 import { useRef } from "react";
 import { useConcierge } from "@/components/intake/ConciergeProvider";
 import { Reveal } from "@/components/ui/Reveal";
+import { consultation } from "@/lib/content";
+import { asset } from "@/lib/utils";
 
 export function InquiryCTA() {
   const reduce = useReducedMotion();
@@ -23,8 +25,8 @@ export function InquiryCTA() {
         className="absolute inset-0 scale-110"
       >
         <Image
-          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2400&q=80"
-          alt="A serene living room bathed in late-afternoon light"
+          src={asset("/images/projects/family-playroom/playroom.jpg")}
+          alt="Bright family playroom with a sectional sofa and open shelving"
           fill
           sizes="100vw"
           className="object-cover"
@@ -72,6 +74,10 @@ export function InquiryCTA() {
                 Schedule Consultation
               </button>
             </div>
+            <p className="mt-6 text-caption text-canvas/60">
+              Consultations {consultation.fee} · {consultation.formats} ·
+              Applied toward your design fee
+            </p>
           </Reveal>
         </div>
       </div>

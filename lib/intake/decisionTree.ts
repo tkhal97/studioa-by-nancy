@@ -90,7 +90,7 @@ export function adaptiveOpeningCopy(intent: "inquire" | "schedule" | "pricing") 
       return {
         eyebrow: "Schedule a private consultation",
         title: "Book a consultation with Nancy.",
-        sub: "Two short questions, then choose a time directly from Nancy's calendar.",
+        sub: "A $250 consultation over Zoom or in your home - applied toward your design fee if we continue. Two short questions, then choose a time from Nancy's calendar.",
       };
     case "pricing":
       return {

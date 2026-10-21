@@ -7,7 +7,8 @@ import { Wordmark } from "@/components/ui/Wordmark";
 import { useConcierge } from "@/components/intake/ConciergeProvider";
 
 const NAV = [
-  { label: "Aesthetics", href: "/portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Inspiration", href: "/inspiration" },
   { label: "Studio", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Process", href: "/process" },
