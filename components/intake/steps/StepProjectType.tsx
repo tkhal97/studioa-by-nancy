@@ -40,15 +40,12 @@ export function StepProjectType() {
           description="Homes, apartments, second residences"
           image={RES}
           badge={
-            <span className="flex items-center gap-2 rounded-full bg-obsidian/35 py-1.5 pl-2 pr-3 backdrop-blur-md">
+            <span className="flex items-center rounded-full bg-obsidian/35 p-2 backdrop-blur-md">
               <img
                 src={adams.logoLight}
-                alt=""
+                alt={adams.name}
                 className="h-6 w-auto"
               />
-              <span className="font-mono text-[9px] uppercase leading-tight tracking-[0.18em] text-canvas">
-                {adams.name}
-              </span>
             </span>
           }
           className="aspect-[16/10]"
