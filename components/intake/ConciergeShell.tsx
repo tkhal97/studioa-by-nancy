@@ -3,10 +3,11 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef } from "react";
 import { useConcierge } from "./ConciergeProvider";
-import { useIntake, currentStepId } from "@/lib/intake/store";
-import { adaptiveOpeningCopy } from "@/lib/intake/decisionTree";
+import { useIntake, currentStepId, useStepPosition } from "@/lib/intake/store";
+import { STEPS, adaptiveOpeningCopy } from "@/lib/intake/decisionTree";
 import { ProgressRail } from "./ProgressRail";
 import { StepProjectType } from "./steps/StepProjectType";
+import { StepRooms } from "./steps/StepRooms";
 import { StepScope } from "./steps/StepScope";
 import { StepAesthetic } from "./steps/StepAesthetic";
 import { StepInvestment } from "./steps/StepInvestment";
@@ -16,7 +17,7 @@ import { StepDetails } from "./steps/StepDetails";
 import { StepConfirmation } from "./steps/StepConfirmation";
 import { ScheduleFlow } from "./ScheduleFlow";
 import { Wordmark } from "@/components/ui/Wordmark";
-import { intakeSchema } from "@/lib/intake/schema";
+import { sendInquiry } from "@/lib/intake/send";
 
 export function ConciergeShell() {
   const { open, source, intent, closeConcierge } = useConcierge();
@@ -42,32 +43,23 @@ export function ConciergeShell() {
   }, [open]);
 
   const stepId = currentStepId(stepIndex);
+  const position = useStepPosition(stepId);
   const copy = useMemo(() => adaptiveOpeningCopy(intent), [intent]);
 
   async function submit() {
     setError(undefined);
     setSubmitting(true);
     try {
-      const payload = intakeSchema.parse({
+      await sendInquiry({
         ...draft,
+        // rooms only apply to residential projects
+        rooms: draft.projectType === "residential" ? draft.rooms : undefined,
         source,
         intent,
         variant: "full",
       });
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = (await res.json()) as {
-        ok: boolean;
-        leadId?: string;
-        error?: string;
-      };
-      if (!res.ok || !data.ok)
-        throw new Error(data.error ?? "Submission failed");
-      setSubmitted(data.leadId);
-      setStep(7); // confirmation
+      setSubmitted();
+      setStep(STEPS.indexOf("confirmation"));
     } catch (e) {
       setSubmitting(false);
       setError(e instanceof Error ? e.message : "Something went wrong");
@@ -169,15 +161,17 @@ export function ConciergeShell() {
                 {intent !== "schedule" && (
                   <div className="mb-8 flex items-center gap-3 text-caption text-clay lg:hidden">
                     <span className="text-ink">
-                      {String(stepIndex + 1).padStart(2, "0")}
+                      {String(position.number).padStart(2, "0")}
                     </span>
                     <span className="relative h-px flex-1 overflow-hidden bg-stone/50">
                       <span
                         className="absolute inset-y-0 left-0 bg-ink transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                        style={{ width: `${((stepIndex + 1) / 8) * 100}%` }}
+                        style={{
+                          width: `${(position.number / position.total) * 100}%`,
+                        }}
                       />
                     </span>
-                    <span>08</span>
+                    <span>{String(position.total).padStart(2, "0")}</span>
                   </div>
                 )}
 
@@ -187,6 +181,7 @@ export function ConciergeShell() {
                   <AnimatePresence mode="wait">
                     <div key={stepId}>
                       {stepId === "projectType" && <StepProjectType />}
+                      {stepId === "rooms" && <StepRooms />}
                       {stepId === "scope" && <StepScope />}
                       {stepId === "aesthetic" && <StepAesthetic />}
                       {stepId === "investment" && <StepInvestment />}

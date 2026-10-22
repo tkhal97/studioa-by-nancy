@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useIntake } from "@/lib/intake/store";
+import { useIntake, useStepPosition } from "@/lib/intake/store";
 import { adaptiveConfirmationCopy } from "@/lib/intake/decisionTree";
 import { useConcierge } from "../ConciergeProvider";
 import { CalendarEmbed } from "../CalendarEmbed";
@@ -12,6 +12,7 @@ export function StepConfirmation() {
   const reset = useIntake((s) => s.reset);
   const { intent, closeConcierge } = useConcierge();
   const copy = adaptiveConfirmationCopy(draft);
+  const position = useStepPosition("confirmation");
 
   return (
     <motion.div
@@ -50,7 +51,9 @@ export function StepConfirmation() {
       </motion.div>
 
       <div>
-        <div className="text-caption text-clay">08 · Sent</div>
+        <div className="text-caption text-clay">
+          {String(position.total).padStart(2, "0")} · Sent
+        </div>
         <h2 className="text-h2 mt-4 max-w-[16ch] font-display leading-[1.05]">
           {copy.title}
         </h2>

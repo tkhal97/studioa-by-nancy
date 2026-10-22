@@ -4,11 +4,14 @@ import { useIntake } from "@/lib/intake/store";
 import { StepShell } from "./StepShell";
 import { CardChoice } from "./CardChoice";
 import { StepNav } from "../StepNav";
+import { asset } from "@/lib/utils";
+import { partners } from "@/lib/content";
 
-const RES =
-  "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80";
-const COM =
-  "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=900&q=80";
+const adams = partners[0];
+
+// A custom home by partner Adams Architectural Designs
+const RES = asset("/images/partners/adams-custom-home.jpg");
+const COM = asset("/images/intake/commercial-hotel.jpg");
 
 export function StepProjectType() {
   const draft = useIntake((s) => s.draft);
@@ -19,8 +22,7 @@ export function StepProjectType() {
 
   return (
     <StepShell
-      index={0}
-      total={8}
+      step="projectType"
       eyebrow="Project Type"
       title={
         <>
@@ -37,11 +39,23 @@ export function StepProjectType() {
           title="Residential"
           description="Homes, apartments, second residences"
           image={RES}
+          badge={
+            <span className="flex items-center gap-2 rounded-full bg-obsidian/35 py-1.5 pl-2 pr-3 backdrop-blur-md">
+              <img
+                src={adams.logoLight}
+                alt=""
+                className="h-6 w-auto"
+              />
+              <span className="font-mono text-[9px] uppercase leading-tight tracking-[0.18em] text-canvas">
+                {adams.name}
+              </span>
+            </span>
+          }
           className="aspect-[16/10]"
         />
         <CardChoice
           selected={selected === "commercial"}
-          onSelect={() => update({ projectType: "commercial" })}
+          onSelect={() => update({ projectType: "commercial", rooms: undefined })}
           title="Commercial"
           description="Hospitality, retail, workspace"
           image={COM}

@@ -1,7 +1,5 @@
 "use client";
 
-import { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
 import { useIntake } from "@/lib/intake/store";
 import { StepShell } from "./StepShell";
 import { StepNav } from "../StepNav";
@@ -11,40 +9,11 @@ export function StepDetails({ onSubmit }: { onSubmit: () => void }) {
   const update = useIntake((s) => s.update);
   const prev = useIntake((s) => s.prev);
   const submitting = useIntake((s) => s.submitting);
-
-  const onDrop = useCallback(
-    (files: File[]) => {
-      // Store file names for the email; uploads happen on submit
-      const meta = files.map((f) => ({
-        name: f.name,
-        size: f.size,
-        type: f.type,
-      }));
-      (window as unknown as { __studioFiles?: File[] }).__studioFiles = files;
-      update({
-        details: draft.details ?? "",
-        // attach metadata via a hidden field - simple approach for now
-      });
-      void meta;
-    },
-    [draft.details, update],
-  );
-
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone({
-      onDrop,
-      accept: {
-        "image/*": [".jpg", ".jpeg", ".png", ".heic"],
-        "application/pdf": [".pdf"],
-      },
-      maxFiles: 10,
-      maxSize: 10 * 1024 * 1024,
-    });
+  const error = useIntake((s) => s.error);
 
   return (
     <StepShell
-      index={6}
-      total={8}
+      step="details"
       eyebrow="The Vision"
       title={
         <>
@@ -66,30 +35,24 @@ export function StepDetails({ onSubmit }: { onSubmit: () => void }) {
           />
         </label>
 
-        <div
-          {...getRootProps()}
-          className={`relative cursor-pointer rounded-[2px] border border-dashed p-8 text-center transition-colors ${
-            isDragActive
-              ? "border-ink bg-linen"
-              : "border-stone/60 bg-canvas/40"
-          }`}
-        >
-          <input {...getInputProps()} />
+        <div className="rounded-[2px] border border-dashed border-stone/60 bg-canvas/40 p-6">
           <p className="text-caption">Optional · Inspiration & Plans</p>
-          <p className="mt-3 font-display text-xl text-ink">
-            Drop floor plans, Pinterest screenshots, or inspiration images
+          <p className="mt-3 text-sm leading-relaxed text-ink/75">
+            Have floor plans, photos of the space, or Pinterest boards? Reply
+            to Nancy&rsquo;s email with them attached - she&rsquo;ll be in touch
+            once your inquiry comes through.
           </p>
-          <p className="mt-3 text-xs text-ink/55">
-            Up to 10 files · JPG, PNG, HEIC, PDF · 10MB each
-          </p>
-          {acceptedFiles.length > 0 && (
-            <p className="mt-4 text-xs text-ink/70">
-              {acceptedFiles.length} file{acceptedFiles.length > 1 ? "s" : ""}{" "}
-              attached
-            </p>
-          )}
         </div>
       </div>
+
+      {error && (
+        <p
+          role="alert"
+          className="mt-6 rounded-[2px] border border-terracotta/40 bg-terracotta/5 px-4 py-3 text-sm text-terracotta-deep"
+        >
+          {error}
+        </p>
+      )}
 
       <StepNav
         onBack={prev}

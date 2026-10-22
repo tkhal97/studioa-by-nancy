@@ -3,24 +3,25 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useStepPosition } from "@/lib/intake/store";
+import type { StepId } from "@/lib/intake/decisionTree";
 
 export function StepShell({
-  index,
-  total,
+  step,
   eyebrow,
   title,
   sub,
   children,
   className,
 }: {
-  index: number;
-  total: number;
+  step: StepId;
   eyebrow?: string;
   title: ReactNode;
   sub?: ReactNode;
   children: ReactNode;
   className?: string;
 }) {
+  const { number, total } = useStepPosition(step);
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -33,7 +34,7 @@ export function StepShell({
         {eyebrow && (
           <div className="text-caption text-clay">
             <span className="text-ink">
-              {String(index + 1).padStart(2, "0")}
+              {String(number).padStart(2, "0")}
             </span>
             <span className="mx-2 inline-block h-px w-6 align-middle bg-stone/70" />
             {eyebrow}

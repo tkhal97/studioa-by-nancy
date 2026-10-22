@@ -27,8 +27,7 @@ export function StepContact() {
 
   return (
     <StepShell
-      index={5}
-      total={8}
+      step="contact"
       eyebrow="Contact"
       title={
         <>

@@ -9,7 +9,7 @@ import { useConcierge } from "@/components/intake/ConciergeProvider";
 const NAV = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "Inspiration", href: "/inspiration" },
-  { label: "Studio", href: "/about" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Process", href: "/process" },
   { label: "Journal", href: "/journal" },

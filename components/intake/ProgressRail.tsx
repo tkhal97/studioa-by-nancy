@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { STEPS } from "@/lib/intake/decisionTree";
+import { STEPS, visibleSteps } from "@/lib/intake/decisionTree";
+import { useIntake } from "@/lib/intake/store";
 import { cn } from "@/lib/utils";
 
 export function ProgressRail({
@@ -13,6 +14,7 @@ export function ProgressRail({
 }) {
   const labels: Record<(typeof STEPS)[number], string> = {
     projectType: "Project",
+    rooms: "Rooms",
     scope: "Scope",
     aesthetic: "Aesthetic",
     investment: "Investment",
@@ -22,7 +24,11 @@ export function ProgressRail({
     confirmation: "Sent",
   };
 
-  const pct = (index / (STEPS.length - 1)) * 100;
+  const draft = useIntake((s) => s.draft);
+  const steps = visibleSteps(draft);
+  // position of the current step among the steps that apply to this draft
+  const at = steps.indexOf(STEPS[index]);
+  const pct = (at / (steps.length - 1)) * 100;
 
   return (
     <div
@@ -39,9 +45,9 @@ export function ProgressRail({
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         style={{ height: 0 }}
       />
-      {STEPS.map((s, i) => {
-        const done = i < index;
-        const active = i === index;
+      {steps.map((s, i) => {
+        const done = i < at;
+        const active = i === at;
         return (
           <div key={s} className="relative flex items-center gap-4 text-caption">
             <span

@@ -30,8 +30,7 @@ export function StepInvestment() {
 
   return (
     <StepShell
-      index={3}
-      total={8}
+      step="investment"
       eyebrow="Investment"
       title={
         <>

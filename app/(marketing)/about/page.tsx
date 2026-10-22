@@ -4,7 +4,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Signature } from "@/components/ui/Signature";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
 import { PageHero } from "@/components/ui/PageHero";
+import { Partners } from "@/components/about/Partners";
 import { projects } from "@/lib/content";
+import { asset } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Studio · About Nancy",
@@ -58,11 +60,11 @@ export default function AboutPage() {
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden bg-linen">
               <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1400&q=80"
-                alt="Portrait of Nancy"
+                src={asset("/images/nancy/portrait-standing.jpg")}
+                alt="Portrait of Nancy Alkhouri, founder and principal designer"
                 fill
                 sizes="(min-width: 1024px) 40vw, 90vw"
-                className="object-cover"
+                className="object-cover object-[50%_30%]"
               />
             </div>
             <p className="mt-6 text-caption">Founder · Principal Designer</p>
@@ -168,6 +170,8 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
+
+      <Partners />
 
       <InquiryCTA />
     </>

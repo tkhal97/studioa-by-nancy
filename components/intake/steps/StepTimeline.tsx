@@ -21,8 +21,7 @@ export function StepTimeline() {
 
   return (
     <StepShell
-      index={4}
-      total={8}
+      step="timeline"
       eyebrow="Timeline"
       title={
         <>

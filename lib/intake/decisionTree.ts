@@ -7,6 +7,7 @@ import {
 
 export const STEPS = [
   "projectType",
+  "rooms",
   "scope",
   "aesthetic",
   "investment",
@@ -16,6 +17,16 @@ export const STEPS = [
   "confirmation",
 ] as const;
 export type StepId = (typeof STEPS)[number];
+
+/** Whether a step applies to this draft - room options are residential only. */
+export function stepApplies(id: StepId, draft: IntakeDraft) {
+  return id !== "rooms" || draft.projectType === "residential";
+}
+
+/** The steps this draft will walk through, in order. */
+export function visibleSteps(draft: IntakeDraft) {
+  return STEPS.filter((id) => stepApplies(id, draft));
+}
 
 export function investmentOptionsFor(branch: ProjectType) {
   return branch === "residential"
@@ -27,6 +38,8 @@ export function isStepComplete(id: StepId, draft: IntakeDraft): boolean {
   switch (id) {
     case "projectType":
       return !!draft.projectType;
+    case "rooms":
+      return !!draft.rooms && draft.rooms.length > 0;
     case "scope":
       return !!draft.scope && draft.scope.length > 0;
     case "aesthetic":

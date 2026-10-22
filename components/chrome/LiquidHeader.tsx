@@ -12,7 +12,7 @@ import { MobileMenu } from "./MobileMenu";
 const NAV = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "Inspiration", href: "/inspiration" },
-  { label: "Studio", href: "/about" },
+  { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
 ];

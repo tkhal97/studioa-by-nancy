@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatPhone } from "@/lib/utils";
+import { sendInquiry } from "@/lib/intake/send";
 
 const STORAGE_KEY = "studio-prompt-shown-at-v1";
 const SUPPRESS_DAYS = 14;
@@ -80,30 +81,23 @@ export function FirstVisitPrompt() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          source: "first-visit",
-          intent: "inquire",
-          variant: "first-visit",
-          projectType: form.projectType,
-          scope: form.scope ? [form.scope] : ["consultation"],
-          aesthetic: form.aesthetic || "modern-minimal",
-          investment: "rather-not-say",
-          timeline: "planning-phase",
-          contact: {
-            name: form.name,
-            email: form.email,
-            phone: form.phone || undefined,
-          },
-          details: form.details,
-          website: form.website,
-        }),
+      await sendInquiry({
+        source: "first-visit",
+        intent: "inquire",
+        variant: "first-visit",
+        projectType: form.projectType,
+        scope: form.scope ? [form.scope] : ["consultation"],
+        aesthetic: form.aesthetic || "modern-minimal",
+        investment: "rather-not-say",
+        timeline: "planning-phase",
+        contact: {
+          name: form.name,
+          email: form.email,
+          phone: form.phone || undefined,
+        },
+        details: form.details,
+        website: form.website,
       });
-      const data = await res.json();
-      if (!res.ok || !data.ok)
-        throw new Error(data.error ?? "Submission failed");
       setSent(true);
       close(true);
     } catch (e2) {

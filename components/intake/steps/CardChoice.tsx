@@ -10,6 +10,8 @@ export type ChoiceProps = {
   title: string;
   description?: string;
   image?: string;
+  /** small overlay in the image's top-right corner, e.g. a partner logo */
+  badge?: ReactNode;
   children?: ReactNode;
   className?: string;
 };
@@ -20,6 +22,7 @@ export function CardChoice({
   title,
   description,
   image,
+  badge,
   className,
 }: ChoiceProps) {
   return (
@@ -51,6 +54,7 @@ export function CardChoice({
               selected ? "bg-obsidian/15" : "bg-obsidian/0 group-hover:bg-obsidian/8",
             )}
           />
+          {badge && <div className="absolute right-4 top-4">{badge}</div>}
         </div>
       )}
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
@@ -146,5 +150,50 @@ export function PillChoice({
         )}
       </span>
     </motion.button>
+  );
+}
+
+/** Square-cornered toggle with a check, for multi-select steps. */
+export function CheckChoice({
+  selected,
+  onToggle,
+  label,
+}: {
+  selected?: boolean;
+  onToggle: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-pressed={selected}
+      className={cn(
+        "group flex w-full items-center justify-between rounded-[2px] border px-5 py-4 text-left transition-all duration-500",
+        selected
+          ? "border-ink bg-ink text-canvas"
+          : "border-stone/50 bg-canvas text-ink hover:border-ink/40 hover:bg-linen/50",
+      )}
+    >
+      <span className="font-display text-lg">{label}</span>
+      <span
+        className={cn(
+          "inline-flex h-6 w-6 items-center justify-center rounded-full border transition-colors duration-500",
+          selected ? "border-canvas text-canvas" : "border-stone/60 text-stone",
+        )}
+      >
+        {selected ? (
+          <svg width="10" height="8" viewBox="0 0 12 10" fill="none">
+            <path
+              d="M1 5l3.5 3.5L11 1"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ) : null}
+      </span>
+    </button>
   );
 }

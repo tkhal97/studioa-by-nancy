@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { Signature } from "@/components/ui/Signature";
+import { asset } from "@/lib/utils";
 
 export function AboutNancy() {
   return (
@@ -15,11 +16,11 @@ export function AboutNancy() {
             <Reveal>
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[4px] bg-linen">
                 <Image
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80"
-                  alt="Portrait of designer Nancy in her Portland studio"
+                  src={asset("/images/nancy/portrait-seated.jpg")}
+                  alt="Nancy seated in a cream armchair with her laptop"
                   fill
                   sizes="(min-width: 1024px) 40vw, 90vw"
-                  className="object-cover"
+                  className="object-cover object-[50%_35%]"
                 />
               </div>
             </Reveal>

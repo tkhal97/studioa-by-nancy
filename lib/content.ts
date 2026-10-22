@@ -223,6 +223,45 @@ export const details = {
   globeChandelier: shot("details", "globe-chandelier", 1416, 2128, "Black chandelier with clear glass globes"),
 };
 
+// ───────────────────────────── Partners ─────────────────────────────
+export type Partner = {
+  name: string;
+  person: string;
+  discipline: string;
+  description: string;
+  url: string;
+  phone: string;
+  email: string;
+  location: string;
+  /** white mark, for use over photos */
+  logoLight: string;
+  /** ink mark, for light backgrounds */
+  logoDark: string;
+  image: ProjectImage;
+};
+
+export const partners: Partner[] = [
+  {
+    name: "Adams Architectural Designs",
+    person: "Brian Adams",
+    discipline: "Architectural design",
+    description:
+      "Custom homes, additions, garages and ADUs, and 3D renderings. Brian Adams designs the architecture; Studio A brings the interiors to life.",
+    url: "https://www.adamsarchitecturaldesigns.com/home",
+    phone: "503.308.8666",
+    email: "brian@adamsarchitecturaldesigns.com",
+    location: "Gresham, Oregon",
+    logoLight: asset("/images/partners/adams-mark-white.png"),
+    logoDark: asset("/images/partners/adams-mark-ink.png"),
+    image: {
+      src: asset("/images/partners/adams-custom-home.jpg"),
+      alt: "Single-story custom home with cedar accents and stone columns, designed by Adams Architectural Designs",
+      width: 1800,
+      height: 1013,
+    },
+  },
+];
+
 // ───────────────────────────── Consultation ─────────────────────────────
 export const consultation = {
   fee: "$250",
@@ -272,7 +311,7 @@ export const services: Service[] = [
     n: "02",
     title: "Commercial Interior Design",
     body: "Thoughtful design for hospitality, retail, and workspace - spaces that feel welcoming, functional, and made to last.",
-    image: asset("/images/projects/dreamworks-dental/reception.jpg"),
+    image: asset("/images/intake/commercial-hotel.jpg"),
     intro:
       "Hospitality, retail, and workspace interiors built around how guests, customers, and teams actually move through a space. Designed to wear well, photograph beautifully, and quietly do the work of the brand without ever shouting it.",
     includes: [

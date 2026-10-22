@@ -8,6 +8,7 @@ import { CalendarEmbed } from "./CalendarEmbed";
 import { formatPhone } from "@/lib/utils";
 import { useConcierge } from "./ConciergeProvider";
 import { consultation } from "@/lib/content";
+import { sendInquiry } from "@/lib/intake/send";
 
 const RES =
   "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80";
@@ -49,29 +50,22 @@ export function ScheduleFlow() {
     setError(null);
     setSubmitting(true);
     try {
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          source: "schedule",
-          intent: "schedule",
-          variant: "first-visit",
-          projectType: form.projectType,
-          scope: ["consultation"],
-          aesthetic: "modern-minimal",
-          investment: "rather-not-say",
-          timeline: "planning-phase",
-          contact: {
-            name: form.name,
-            email: form.email,
-            phone: form.phone || undefined,
-          },
-          details: "Schedule Consultation flow - booking via calendar.",
-        }),
+      await sendInquiry({
+        source: "schedule",
+        intent: "schedule",
+        variant: "first-visit",
+        projectType: form.projectType,
+        scope: ["consultation"],
+        aesthetic: "modern-minimal",
+        investment: "rather-not-say",
+        timeline: "planning-phase",
+        contact: {
+          name: form.name,
+          email: form.email,
+          phone: form.phone || undefined,
+        },
+        details: "Schedule Consultation flow - booking via calendar.",
       });
-      const data = await res.json();
-      if (!res.ok || !data.ok)
-        throw new Error(data.error ?? "Submission failed");
       setSubmitted(true);
       setStep(2);
     } catch (e) {

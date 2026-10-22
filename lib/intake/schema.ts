@@ -3,6 +3,15 @@ import { z } from "zod";
 export const projectTypeSchema = z.enum(["residential", "commercial"]);
 export type ProjectType = z.infer<typeof projectTypeSchema>;
 
+export const roomOptions = [
+  "living",
+  "bedrooms",
+  "bathroom",
+  "dining",
+  "office",
+] as const;
+export const roomsSchema = z.array(z.enum(roomOptions));
+
 export const scopeOptions = [
   "full-interior-design",
   "renovation",
@@ -60,6 +69,8 @@ export const intakeSchema = z.object({
   source: z.string().optional().default("direct"),
   intent: z.enum(["inquire", "schedule", "pricing"]).optional().default("inquire"),
   projectType: projectTypeSchema,
+  // residential only: which rooms the project covers
+  rooms: roomsSchema.optional(),
   scope: scopeSchema,
   aesthetic: aestheticSchema,
   investment: investmentSchema,
@@ -88,6 +99,13 @@ export const draftSchema = intakeSchema.partial({
 export type IntakeDraft = z.infer<typeof draftSchema>;
 
 export const labels = {
+  rooms: {
+    living: "Living space",
+    bedrooms: "Bedrooms",
+    bathroom: "Bathroom",
+    dining: "Dining space",
+    office: "Office space",
+  } as const,
   scope: {
     "full-interior-design": "Full Interior Design",
     renovation: "Renovation",

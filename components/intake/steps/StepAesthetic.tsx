@@ -2,22 +2,9 @@
 
 import { useIntake } from "@/lib/intake/store";
 import { StepShell } from "./StepShell";
-import { CardChoice } from "./CardChoice";
+import { PillChoice } from "./CardChoice";
 import { StepNav } from "../StepNav";
 import { aestheticOptions, labels } from "@/lib/intake/schema";
-
-const IMAGES: Record<(typeof aestheticOptions)[number], string> = {
-  "modern-minimal":
-    "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
-  "warm-organic":
-    "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=900&q=80",
-  "luxury-contemporary":
-    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=80",
-  transitional:
-    "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80",
-  "high-end-commercial":
-    "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=900&q=80",
-};
 
 const DESCRIPTIONS: Record<(typeof aestheticOptions)[number], string> = {
   "modern-minimal": "Spare, architectural, pared-back",
@@ -35,8 +22,7 @@ export function StepAesthetic() {
 
   return (
     <StepShell
-      index={2}
-      total={8}
+      step="aesthetic"
       eyebrow="Aesthetic"
       title={
         <>
@@ -46,16 +32,14 @@ export function StepAesthetic() {
       }
       sub="A starting point, not a finish line - Nancy will compose the final palette with you."
     >
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3">
         {aestheticOptions.map((opt) => (
-          <CardChoice
+          <PillChoice
             key={opt}
             selected={draft.aesthetic === opt}
             onSelect={() => update({ aesthetic: opt })}
-            title={labels.aesthetic[opt]}
+            label={labels.aesthetic[opt]}
             description={DESCRIPTIONS[opt]}
-            image={IMAGES[opt]}
-            className="aspect-[4/5]"
           />
         ))}
       </div>
